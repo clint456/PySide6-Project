@@ -3,7 +3,6 @@ from loader import Loader
 from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import QFile,QTimer
-
 from qt_material import apply_stylesheet
 
 import sys
@@ -22,11 +21,13 @@ class MyApp(QMainWindow):
         # 在这里可以添加主窗口的其他组件和功能
 
 if __name__ == "__main__":
+    # 创建应用程序
     app = QApplication(sys.argv)
-    #apply_stylesheet(app, theme='dark_blue.xml')
+
+    apply_stylesheet(app,theme="dark_teal.xml")
     # 创建主应用程序窗口
     main_app = MyApp()
 
-    loader = Loader(main_app,10)
+    loader = Loader(main_app,1000)
     #loader.loaderUi.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
