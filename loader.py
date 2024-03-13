@@ -1,34 +1,39 @@
 import sys
 
-from PySide6.QtWidgets import QApplication, QMainWindow
+from PySide6.QtWidgets import QMainWindow
 from PySide6.QtUiTools import QUiLoader
-from PySide6.QtCore import QFile,QTimer,QIODevice
-
+from PySide6.QtCore import QFile, QTimer
 from ui.compiled_resource import *
 
 '''启动加载页面'''
+
+
 class Loader(QMainWindow):
-    def __init__(self,main_app,load_time):
-        super().__init__()
-        
-        #设置加载速度 +1 需要的时间 
+    def __init__(self, parent=None, main_app=None, load_time=100):
+        super().__init__(parent)
+
+        # 设置加载速度 +1 需要的时间
         self.loadtk = load_time
+
+        print("+++++++++")
+
+        loader = QUiLoader()
+        print("-------------")
         # 动态加载ui文件
-        ui_file_name = "./ui/loading.ui"
+        ui_file_name = "loading.ui"
         ui_file = QFile(ui_file_name)
-        if not ui_file.open(QFile.ReadOnly):
-            print(f"Cannot open {ui_file_name}: {ui_file.errorString()}")
-            sys.exit(-1)
+        ui_file.open(QFile.ReadOnly)
 
         # 从UI定义中 创建一个相应的窗口对象
-        self.loaderUi = QUiLoader().load(ui_file)
+        self.loaderUi = loader.load(ui_file)
+        ui_file.close()
 
         # 链接组件，加载触发
         self.loaderUi.cancelButton.clicked.connect(self.handleCancel)
         self.loaderUi.pauseButton.clicked.connect(self.handlePause)
         # 设置初始启动位置
         self.loaderUi.setGeometry(100, 100, 800, 600)
-        #self.loaderUi.loadProgressBar.connect(self.handleProgressBar)
+        # self.loaderUi.loadProgressBar.connect(self.handleProgressBar)
 
         # 主任务
         self.main_app = main_app
@@ -43,24 +48,24 @@ class Loader(QMainWindow):
 
     def handlePause(self):
         # 如果没有暂停，那么暂停
-        if(self.is_stop == False):
+        if (self.is_stop == False):
             self.is_stop = True
             self.loaderUi.pauseButton.setText("继续")
             self.timer.stop()
 
         # 如果正在暂停中，那么继续加载
-        elif(self.is_stop == True):
+        elif (self.is_stop == True):
             self.is_stop = False
             self.timer.start(self.loadtk)
             self.loaderUi.pauseButton.setText("暂停")
+
     def init_ui(self):
         # 设置定时器，模拟加载过程
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.handleProgressBar)
         self.timer.start(self.loadtk)
 
-        #打开画面
-
+        # 打开加载画面
         self.loaderUi.show()
 
     def handleProgressBar(self):
@@ -73,4 +78,3 @@ class Loader(QMainWindow):
             self.timer.stop()
             self.loaderUi.close()
             self.main_app.show()
-
