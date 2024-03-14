@@ -1,5 +1,0 @@
-<RCC>
-  <qresource prefix="loader">
-    <file>../resource/background.jpg</file>
-  </qresource>
-</RCC>

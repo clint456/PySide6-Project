@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'mainUi.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.6.2
+## Created by: Qt User Interface Compiler version 6.4.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -17,42 +17,38 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
 from PySide6.QtWidgets import (QApplication, QMainWindow, QMenu, QMenuBar,
-    QSizePolicy, QStatusBar, QWidget)
+    QPushButton, QSizePolicy, QStatusBar, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(640, 480)
-        self.actionQuit = QAction(MainWindow)
-        self.actionQuit.setObjectName(u"actionQuit")
-        self.actionPreferences = QAction(MainWindow)
-        self.actionPreferences.setObjectName(u"actionPreferences")
-        self.actionAbout_us = QAction(MainWindow)
-        self.actionAbout_us.setObjectName(u"actionAbout_us")
+        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
+        MainWindow.setSizePolicy(sizePolicy)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
+        self.pushButton = QPushButton(self.centralwidget)
+        self.pushButton.setObjectName(u"pushButton")
+        self.pushButton.setGeometry(QRect(90, 70, 75, 24))
         MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QMenuBar(MainWindow)
+        self.menubar.setObjectName(u"menubar")
+        self.menubar.setGeometry(QRect(0, 0, 640, 22))
+        self.menu = QMenu(self.menubar)
+        self.menu.setObjectName(u"menu")
+        self.menu_2 = QMenu(self.menubar)
+        self.menu_2.setObjectName(u"menu_2")
+        MainWindow.setMenuBar(self.menubar)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
         MainWindow.setStatusBar(self.statusbar)
-        self.menubar = QMenuBar(MainWindow)
-        self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 640, 18))
-        self.menufile = QMenu(self.menubar)
-        self.menufile.setObjectName(u"menufile")
-        self.menuSettings = QMenu(self.menubar)
-        self.menuSettings.setObjectName(u"menuSettings")
-        self.menuHelp = QMenu(self.menubar)
-        self.menuHelp.setObjectName(u"menuHelp")
-        MainWindow.setMenuBar(self.menubar)
 
-        self.menubar.addAction(self.menufile.menuAction())
-        self.menubar.addAction(self.menuSettings.menuAction())
-        self.menubar.addAction(self.menuHelp.menuAction())
-        self.menufile.addAction(self.actionQuit)
-        self.menuSettings.addAction(self.actionPreferences)
-        self.menuHelp.addAction(self.actionAbout_us)
+        self.menubar.addAction(self.menu.menuAction())
+        self.menubar.addAction(self.menu_2.menuAction())
 
         self.retranslateUi(MainWindow)
 
@@ -60,12 +56,9 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Server", None))
-        self.actionQuit.setText(QCoreApplication.translate("MainWindow", u"Quit", None))
-        self.actionPreferences.setText(QCoreApplication.translate("MainWindow", u"Preferences", None))
-        self.actionAbout_us.setText(QCoreApplication.translate("MainWindow", u"About us", None))
-        self.menufile.setTitle(QCoreApplication.translate("MainWindow", u"File", None))
-        self.menuSettings.setTitle(QCoreApplication.translate("MainWindow", u"Settings", None))
-        self.menuHelp.setTitle(QCoreApplication.translate("MainWindow", u"Help", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
+        self.menu.setTitle(QCoreApplication.translate("MainWindow", u"\u8bbe\u7f6e", None))
+        self.menu_2.setTitle(QCoreApplication.translate("MainWindow", u"\u8fd0\u884c", None))
     # retranslateUi
 
