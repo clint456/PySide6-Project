@@ -15,12 +15,11 @@ class Loader(QMainWindow):
         # 设置加载速度 +1 需要的时间
         self.loadtk = load_time
 
-        print("+++++++++")
 
         loader = QUiLoader()
-        print("-------------")
+
         # 动态加载ui文件
-        ui_file_name = "loading.ui"
+        ui_file_name = "./ui/loading.ui"
         ui_file = QFile(ui_file_name)
         ui_file.open(QFile.ReadOnly)
 
