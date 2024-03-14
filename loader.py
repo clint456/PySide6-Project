@@ -1,17 +1,19 @@
 import sys
 
-from PySide6.QtWidgets import QMainWindow
+from PySide6.QtWidgets import QMainWindow,QDialog
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import QFile, QTimer
+from PySide6.QtGui import Qt
 from ui.compiled_resource import *
 
 '''启动加载页面'''
 
 
-class Loader(QMainWindow):
+class Loader(QMainWindow,QDialog):
     def __init__(self, parent=None, main_app=None, load_time=100):
         super().__init__(parent)
-
+        
+        self.set_window()
         # 设置加载速度 +1 需要的时间
         self.loadtk = load_time
 
@@ -77,3 +79,10 @@ class Loader(QMainWindow):
             self.timer.stop()
             self.loaderUi.close()
             self.main_app.show()
+
+    def set_window(self):
+       # 关闭系统标题栏
+       self.setWindowFlags(Qt.Window | Qt.FramelessWindowHint | Qt.WindowSystemMenuHint | Qt.WindowMinimizeButtonHint
+                           | Qt.WindowMaximizeButtonHint)
+       # 透明背景
+       self.setAttribute(Qt.WA_TranslucentBackground)

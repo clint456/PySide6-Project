@@ -3,7 +3,7 @@ from loader import Loader
 from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import QFile,QTimer
-from qt_material import apply_stylesheet
+from qt_material import apply_stylesheet,add_fonts
 
 
 import sys
@@ -31,8 +31,8 @@ if __name__ == "__main__":
     # 创建应用程序
     app = QApplication(sys.argv)
     # 使用主题
-    apply_stylesheet(app,theme="dark_teal.xml")
-    
+    apply_stylesheet(app,theme='light_blue.xml')
+
     # 创建主应用程序窗口
     main_app = MyApp()
 

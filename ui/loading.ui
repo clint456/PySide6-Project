@@ -37,7 +37,8 @@
            </sizepolicy>
           </property>
           <property name="styleSheet">
-           <string notr="true">image: url(:/loader/resource/background.jpg);</string>
+           <string notr="true">
+border-image: url(:/loader/resource/background.jpg);</string>
           </property>
           <property name="text">
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
