@@ -5,6 +5,7 @@ from PySide6.QtUiTools import QUiLoader
 from PySide6.QtCore import QFile,QTimer
 from qt_material import apply_stylesheet
 
+
 import sys
 
 class MyApp(QMainWindow):
@@ -31,6 +32,7 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     # 使用主题
     apply_stylesheet(app,theme="dark_teal.xml")
+    
     # 创建主应用程序窗口
     main_app = MyApp()
 
