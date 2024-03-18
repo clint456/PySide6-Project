@@ -3,9 +3,10 @@ import time
 from PySide6.QtWidgets import QApplication, QMainWindow,QWidget
 from PySide6.QtCore import QThread,Signal
 
+
 # 导入ui文件
-from ui.mainUi_ui import *
-from ui.loading_ui import *
+sys.path.append("..")   
+from ui import loading_ui
 
 
 class MyThread(QThread):
@@ -26,6 +27,8 @@ class MyThread(QThread):
 
     def resume_thread(self):
         # 在新线程中执行的恢复的代码
+        pass
+    def stop_thread(self):
         pass
 
     def run(self):
@@ -50,9 +53,8 @@ class ProcessWindow(QWidget):
     
     def setup_ui(self):
 		# GUI界面绘制
-        self.ui = Ui_LoadingScreen()
+        self.ui = loading_ui.Ui_LoadingScreen()
         self.ui.setupUi(self)
-        pass
 
     def setup_thread(self):
         self.thread = MyThread()
