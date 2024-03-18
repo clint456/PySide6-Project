@@ -22,8 +22,9 @@ class MyWorker(QRunnable):
         print(f"Worker finished")
 
     def run(self):
-        res = self.func(*self.args, **self.kwargs)
-        print(f"程序运行的结果是: {res}")
+        while True:
+            res = self.func(*self.args, **self.kwargs)
+            print(f"程序运行的结果是: {res}")
         # #TODO 执行循环任务
         # self.SpinTask()
 

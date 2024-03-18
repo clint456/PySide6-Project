@@ -47,8 +47,9 @@ class MyPool(QThreadPool):
         print(cls.class_variable)
 
 def doSomething():
+
     time.sleep(1)
-    return '耗时操作'
+    return f'耗时操作'
     
 
 def main():
