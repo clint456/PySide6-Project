@@ -1,70 +1,70 @@
-# -*- coding: utf-8 -*-
-
+import sys
 import time
+from PySide6.QtCore import (QRunnable, QThreadPool, Qt,Signal)
+from threadRunner import MyWorker
 
-from PySide6.QtCore import (QRunnable, QThreadPool, Signal, Slot, QSize)
-from PySide6.QtWidgets import (QApplication, QPushButton, QLabel, QVBoxLayout, QWidget)
+'''线程池'''
+class MyPool(QThreadPool):
+    class_variable = "this is a class variable"
 
-
-class MyWorker(QRunnable):
-
-    def __init__(self, func, signal, *args, **kwargs):
+    def __init__(self,Max_thread,signal,Work):
         super().__init__()
-        self.func = func
-        self.args = args
-        self.kwargs = kwargs
+        # 最大线程数
+        self.Max_thread = Max_thread
+        # 工作任务
+        self.Work = Work
+        # 信号
         self.signal = signal
 
-    def run(self):
-        res = self.func(*self.args, **self.kwargs)
-        # 任务完成后发出信号
-        self.signal.emit(res)
+    # 初始化线程
+    def initPool(self):
+        # 创建线程池
+        self.MyThreadPool = QThreadPool()
+        # 设置最大线程数
+        self.MyThreadPool.setMaxThreadCount(self.Max_thread)
+    
+    # 线程启动
+    def startPool(self):
+        if self.Work is not None:
+            # 将任务添加到线程池
+            try:
+                self.MyThreadPool.start(self.Work)
+            except Exception as e:
+                print(f'threadPool 启动失败: {e}')
+                sys.exit("some error message")
+                sys.exit(0)
+        else:
+            print("错误，没有任务需要进行执行！")
+            sys.exit("some error message")
+    
+    def wait_for_done(self):
+    # 在等待所有任务完成之前，阻塞主线程
+        self.MyThreadPool.waitForDone()
+        print("All tasks completed")
+    
+    @classmethod
+    def show_class_variable(cls):
+        print(cls.class_variable)
 
+def doSomething():
+    time.sleep(1)
+    return '耗时操作'
+    
 
-def do_something():
-    # time.sleep(0.1)
-
-    return 9999
-
-
-class MainWindow(QWidget):
+def main():
     signal = Signal(int)
+    myWork = MyWorker(signal,doSomething)
+    
+    # 类级别的方法
+    MyPool.show_class_variable()
 
-    def __init__(self, parent=None):
-        super().__init__(parent=parent)
-        self.thread_pool = QThreadPool()
-        self.setup_ui()
-        self.button.clicked.connect(self.setup_thread)
+    myPool = MyPool(2,signal,myWork)
 
-    def setup_ui(self):
-        self.setWindowTitle('demo')
-        self.resize(QSize(250, 180))
-        # 创建一个垂直布局
-        layout = QVBoxLayout()
-        # 创建一个标签
-        self.label = QLabel('This is a label => ')
-        layout.addWidget(self.label)
-        # 创建一个按钮
-        self.button = QPushButton('execute')
-        layout.addWidget(self.button)
-        # 将布局设置为主窗口的布局
-        self.setLayout(layout)
-        # 显示窗口
-        self.show()
+    # 实例方法
+    myPool.initPool()
+    myPool.startPool()
+    myPool.wait_for_done()
 
-    def setup_thread(self):
-        worker = MyWorker(do_something, self.signal)
-        self.thread_pool.start(worker)
-        self.signal.connect(self.thread_finished)
+if __name__ == "__main__":
+    main()
 
-    @Slot(int)
-    def thread_finished(self, res):
-        self.label.setText('This is a label => ' + f'{res}')
-        print(f'{res}')
-
-
-if __name__ == '__main__':
-    app = QApplication([])
-    window = MainWindow()
-    window.show()
-    app.exec()
