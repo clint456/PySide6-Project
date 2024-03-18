@@ -8,7 +8,7 @@ import keyboard
 
 sys.path.append("..")
 from module.threadpool import MyPool
-from module.threadRunner import MyWorker
+from module.MyWorker import MyWorker,SocketModule
 
 
 def worker_1():
@@ -33,12 +33,15 @@ def main():
     work_list = []
     myWork1 = MyWorker(signal,worker_1)
     myWork2 = MyWorker(signal,worker_2)
+
+    socket = SocketModule()
     
     work_list.append(myWork1)
     work_list.append(myWork2)
+    work_list.append(socket)
 
     # 创建线程池
-    myPool = MyPool(2,signal,work_list)
+    myPool = MyPool(3,signal,work_list)
 
     # 实例方法
     myPool.initPool()
@@ -50,6 +53,7 @@ def main():
             logging.error('Ctrl+C被按下')
             myPool.stopPool()
             break
+
 
 if __name__ == "__main__":
     main()

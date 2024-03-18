@@ -33,11 +33,11 @@ class MyPool(QThreadPool):
             for item in self.Work:
                 if (self.MyThreadPool.tryStart(item) == False):
                     logging.error("任务启动失败")
-                    sys.exit()
+                    sys.exit(0)
             logging.info("所有线程启动完毕！")
         else:
             logging.error("错误，没有任务需要进行执行！")
-            sys.exit()
+            sys.exit(0)
 
     def tryWork(self):
         '''线程启动
@@ -46,11 +46,11 @@ class MyPool(QThreadPool):
         if self.Work:
             if (self.MyThreadPool.tryStart(self.Work) == False):
                     logging.error("任务启动失败")
-                    sys.exit()
+                    sys.exit(0)
             logging.info("线程启动完毕！")
         else:
             logging.error("错误，没有Worker需要进行执行！")
-            sys.exit()
+            sys.exit(0)
     
     def stopPool(self):
     # 在等待所有任务完成之前，阻塞主线程

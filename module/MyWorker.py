@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
-
-import time
-import keyboard
 import logging
+import time
 
 from PySide6.QtCore import (QRunnable, QThreadPool, Signal, Slot, QSize)
 from PySide6.QtWidgets import (QApplication, QPushButton, QLabel, QVBoxLayout, QWidget)
