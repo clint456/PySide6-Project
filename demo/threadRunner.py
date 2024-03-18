@@ -14,7 +14,7 @@ class MyWorker(QRunnable):
         self.args = args
         self.kwargs = kwargs
         self.signal = signal
-
+        
 
     def SpinTask():
         print(f"Worker started")

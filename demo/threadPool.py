@@ -32,7 +32,6 @@ class MyPool(QThreadPool):
             except Exception as e:
                 print(f'threadPool 启动失败: {e}')
                 sys.exit("some error message")
-                sys.exit(0)
         else:
             print("错误，没有任务需要进行执行！")
             sys.exit("some error message")
@@ -42,9 +41,6 @@ class MyPool(QThreadPool):
         self.MyThreadPool.waitForDone()
         print("All tasks completed")
     
-    @classmethod
-    def show_class_variable(cls):
-        print(cls.class_variable)
 
 def doSomething():
 
@@ -54,11 +50,9 @@ def doSomething():
 
 def main():
     signal = Signal(int)
+    # 创建工作类
     myWork = MyWorker(signal,doSomething)
-    
-    # 类级别的方法
-    MyPool.show_class_variable()
-
+    # 创建线程池
     myPool = MyPool(2,signal,myWork)
 
     # 实例方法
