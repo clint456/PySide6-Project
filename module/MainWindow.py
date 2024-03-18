@@ -6,7 +6,7 @@ from PySide6.QtCore import (QRunnable, QThreadPool, Signal, Slot, QSize)
 from PySide6.QtWidgets import (QApplication, QPushButton, QLabel, QVBoxLayout, QWidget)
 
 
-class MainWindow():
+class MainWindow(QRunnable):
     def __init__(self):
         super().__init__()
 

@@ -20,6 +20,7 @@ class MyWorker(QRunnable):
             #TODO 执行循环任务
             res = self.func(*self.args, **self.kwargs)
             logging.info(f"程序运行的结果是: {res}")
+            self.signal.emit(res)
        
         # # 任务完成后发出信号    
         # self.signal.emit(res)

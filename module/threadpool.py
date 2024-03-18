@@ -6,8 +6,6 @@ from PySide6.QtCore import (QRunnable, QThreadPool, Qt,Signal)
 
 '''线程池'''
 class MyPool(QThreadPool):
-    class_variable = "this is a class variable"
-
     def __init__(self,Max_thread,signal,Work):
         super().__init__()
         # 最大线程数
