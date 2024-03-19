@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'loading.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.4.2
+## Created by: Qt User Interface Compiler version 6.6.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -18,7 +18,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLabel, QProgressBar,
     QPushButton, QSizePolicy, QSpacerItem, QStatusBar,
     QVBoxLayout, QWidget)
-import resource.compiled_resource
+from resource import resource_rc
 
 class Ui_LoadingScreen(object):
     def setupUi(self, LoadingScreen):
@@ -37,7 +37,7 @@ class Ui_LoadingScreen(object):
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.label = QLabel(LoadingScreen)
         self.label.setObjectName(u"label")
-        sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Expanding)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
@@ -59,7 +59,7 @@ class Ui_LoadingScreen(object):
 
         self.loadProgressBar = QProgressBar(LoadingScreen)
         self.loadProgressBar.setObjectName(u"loadProgressBar")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.loadProgressBar.sizePolicy().hasHeightForWidth())
@@ -70,7 +70,7 @@ class Ui_LoadingScreen(object):
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout.addItem(self.horizontalSpacer_5)
 
@@ -79,7 +79,7 @@ class Ui_LoadingScreen(object):
 
         self.horizontalLayout.addWidget(self.startButton)
 
-        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout.addItem(self.horizontalSpacer_4)
 
@@ -88,7 +88,7 @@ class Ui_LoadingScreen(object):
 
         self.horizontalLayout.addWidget(self.pauseButton)
 
-        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout.addItem(self.horizontalSpacer_2)
 
@@ -97,13 +97,13 @@ class Ui_LoadingScreen(object):
 
         self.horizontalLayout.addWidget(self.resumeButton)
 
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout.addItem(self.horizontalSpacer)
 
         self.stopButton = QPushButton(LoadingScreen)
         self.stopButton.setObjectName(u"stopButton")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
+        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
         sizePolicy2.setHorizontalStretch(0)
         sizePolicy2.setVerticalStretch(0)
         sizePolicy2.setHeightForWidth(self.stopButton.sizePolicy().hasHeightForWidth())
@@ -111,7 +111,7 @@ class Ui_LoadingScreen(object):
 
         self.horizontalLayout.addWidget(self.stopButton)
 
-        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout.addItem(self.horizontalSpacer_3)
 
