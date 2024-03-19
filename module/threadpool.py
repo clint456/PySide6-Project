@@ -6,14 +6,13 @@ from PySide6.QtCore import (QRunnable, QThreadPool, Qt,Signal)
 
 '''线程池'''
 class MyPool(QThreadPool):
-    def __init__(self,Max_thread,signal,Work):
+    def __init__(self,Max_thread,Work):
         super().__init__()
         # 最大线程数
         self.Max_thread = Max_thread
         # 工作任务
         self.Work = Work
-        # 信号
-        self.signal = signal
+
 
     # 初始化线程
     def initPool(self):

@@ -2,72 +2,102 @@
 import logging
 import sys
 import time
-
-from PySide6.QtCore import Signal
 import keyboard
 
+from PySide6.QtCore import (Signal,Slot)
+from PySide6.QtWidgets import (
+    QApplication,
+    QLabel,
+    QMainWindow,
+    QPushButton,
+    QVBoxLayout,
+    QWidget,
+)
+
+
 sys.path.append("..")
-from module import ThreadPool,MyWorker,SocketModule,LoadWindow,MainWindow
+from module import (ThreadPool,MyWorker,SocketModule,
+                    LoadWindow,MainWindow,MySignals,NewWindow)
+
 
 def worker_1():
-
     time.sleep(1)
     return f'线程1 的操作'
 
 def worker_2():
-
     time.sleep(1)
     return f'线程2 的操作'
 
-def main_window():
-    return f"main window 的操作"
 
-def main():
-    # 设置打印日志的级别，level级别以上的日志会打印出
-    # level=logging.DEBUG 、INFO 、WARNING、ERROR、CRITICAL
+signal_worker1 = MySignals.MySignals()
+signal_worker2 = MySignals.MySignals()
 
-    # 此处进行Logging.basicConfig() 设置，后面设置无效
-    logging.basicConfig(level=logging.DEBUG)
+# 创建工作类
+work_list = []
 
-    signal_worker1 = Signal(int)
-    signal_worker2 = Signal(int)
-    signal_socket = Signal(int)
-    signal_main = Signal(int)
-    signal_load = Signal(int)
+myWork1 = MyWorker.MyWorker(signal_worker1.text_print,worker_1)
+myWork2 = MyWorker.MyWorker(signal_worker2.text_print,worker_2)
+work_list.append(myWork1)
+work_list.append(myWork2)
+# 创建线程池,设置一次最多运行10个线程
+myPool = ThreadPool.MyPool(10,work_list)
 
-
-    # 创建工作类
-    work_list = []
-    signal_list = {'work1':signal_worker1,'work2':signal_worker2,'socket':signal_socket,'main':signal_main,'load':signal_load}
-
-    myWork1 = MyWorker.MyWorker(signal_worker1,worker_1)
-    myWork2 = MyWorker.MyWorker(signal_worker2,worker_2)
-
-    socketWorker = SocketModule.SocketModule()
-    mainWindow = MainWindow.MainWindow()
-    loadWindow = LoadWindow.LoadWindow()
-
+class Controller(QWidget):
     
-    work_list.append(myWork1)
-    work_list.append(myWork2)
-    work_list.append(socketWorker)
-    work_list.append(mainWindow)
-    work_list.append(loadWindow)
+    
+    def __init__(self):
+        super().__init__()
+        # 设置打印日志的级别，level级别以上的日志会打印出
+        logging.basicConfig(level=logging.DEBUG)
+        self.window1 = NewWindow.AnotherWindow()
+        self.window2 = NewWindow.AnotherWindow()
+        signal_worker1.text_print.connect(self.signal_worker1_trig)
+        signal_worker2.text_print.connect(self.signal_worker2_trig)
+        myPool.initPool()
+        # 启动线程池
+        myPool.tryPool()
+        
+        self.setup_ui()
 
-    # 创建线程池,设置一次最多运行10个线程
-    myPool = ThreadPool.MyPool(10,signal_list,work_list)
+       
+    def setup_ui(self):
 
-    # 实例方法
-    myPool.initPool()
-    myPool.tryPool()
+        self.setWindowTitle('控制器')
+        # 布局管理器
+        layout = QVBoxLayout()
 
-    # 等待触发结束
-    while(True):
-        if keyboard.is_pressed('ctrl') and keyboard.is_pressed('c'):
-            logging.error('Ctrl+C被按下')
-            myPool.stopPool()
-            break
+        button1 = QPushButton("open Main")
+        button1.clicked.connect(self.toggle_window1)
+        layout.addWidget(button1)
+
+        button2 = QPushButton("open load")
+        button2.clicked.connect(self.toggle_window2)
+        layout.addWidget(button2)
+
+        self.setLayout(layout)
+
+    def toggle_window1(self):
+        if self.window1.isVisible():
+            self.window1.hide()
+        else:
+            self.window1.show()
+
+    def toggle_window2(self):
+        if self.window2.isVisible():
+            self.window2.hide()
+        else:
+            self.window2.show()
+
+    @Slot(str)
+    def signal_worker1_trig(res):
+            logging.info(f"signal_worker1_res: {res}")
+
+    @Slot(str)
+    def signal_worker2_trig(res):
+            logging.info(f"signal_worker2_res: {res}")
 
 
-if __name__ == "__main__":
-    main()
+app = QApplication(sys.argv)
+controller = Controller()
+controller.show()
+app.exec()

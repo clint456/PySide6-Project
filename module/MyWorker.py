@@ -20,7 +20,7 @@ class MyWorker(QRunnable):
             #TODO 执行循环任务
             res = self.func(*self.args, **self.kwargs)
             logging.info(f"程序运行的结果是: {res}")
-            self.signal.emit(res)
+            self.signal.emit(f'触发反弹')
        
         # # 任务完成后发出信号    
         # self.signal.emit(res)
@@ -29,4 +29,6 @@ class MyWorker(QRunnable):
     #TODO 设置任务线程是否自动销毁
     def setAutoDelete(self, autoDelete: bool) -> None:
         return super().setAutoDelete(autoDelete)
-        
+    
+
+    
