@@ -47,6 +47,7 @@ class MyThread(QThread):
 
 if __name__ == '__main__':  
 	app = QApplication(sys.argv)
+    apply_stylesheet()
 	main = Main()
 	main.show()
 	sys.exit(app.exec())

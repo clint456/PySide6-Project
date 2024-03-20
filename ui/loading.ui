@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>620</width>
-    <height>480</height>
+    <height>457</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -57,7 +57,7 @@ border-image: url(:/loader/resource/background.jpg);</string>
        <item alignment="Qt::AlignHCenter">
         <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>反无人及测试系统</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;反无人及测试系统&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
        </item>
@@ -93,46 +93,6 @@ border-image: url(:/loader/resource/background.jpg);</string>
           <widget class="QPushButton" name="startButton">
            <property name="text">
             <string>启动</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_4">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pauseButton">
-           <property name="text">
-            <string>暂停</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_2">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QPushButton" name="resumeButton">
-           <property name="text">
-            <string>恢复</string>
            </property>
           </widget>
          </item>
@@ -180,9 +140,6 @@ border-image: url(:/loader/resource/background.jpg);</string>
       </layout>
      </item>
     </layout>
-   </item>
-   <item>
-    <widget class="QStatusBar" name="statusbar"/>
    </item>
   </layout>
  </widget>

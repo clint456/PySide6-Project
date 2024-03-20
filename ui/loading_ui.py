@@ -16,15 +16,15 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLabel, QProgressBar,
-    QPushButton, QSizePolicy, QSpacerItem, QStatusBar,
-    QVBoxLayout, QWidget)
-from resource import resource_rc
+    QPushButton, QSizePolicy, QSpacerItem, QVBoxLayout,
+    QWidget)
+import resource_rc
 
 class Ui_LoadingScreen(object):
     def setupUi(self, LoadingScreen):
         if not LoadingScreen.objectName():
             LoadingScreen.setObjectName(u"LoadingScreen")
-        LoadingScreen.resize(620, 480)
+        LoadingScreen.resize(620, 457)
         LoadingScreen.setMinimumSize(QSize(620, 0))
         LoadingScreen.setProperty("unifiedTitleAndToolBarOnMac", False)
         self.verticalLayout_3 = QVBoxLayout(LoadingScreen)
@@ -79,24 +79,6 @@ class Ui_LoadingScreen(object):
 
         self.horizontalLayout.addWidget(self.startButton)
 
-        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout.addItem(self.horizontalSpacer_4)
-
-        self.pauseButton = QPushButton(LoadingScreen)
-        self.pauseButton.setObjectName(u"pauseButton")
-
-        self.horizontalLayout.addWidget(self.pauseButton)
-
-        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout.addItem(self.horizontalSpacer_2)
-
-        self.resumeButton = QPushButton(LoadingScreen)
-        self.resumeButton.setObjectName(u"resumeButton")
-
-        self.horizontalLayout.addWidget(self.resumeButton)
-
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout.addItem(self.horizontalSpacer)
@@ -124,11 +106,6 @@ class Ui_LoadingScreen(object):
 
         self.verticalLayout_3.addLayout(self.horizontalLayout_2)
 
-        self.statusbar = QStatusBar(LoadingScreen)
-        self.statusbar.setObjectName(u"statusbar")
-
-        self.verticalLayout_3.addWidget(self.statusbar)
-
 
         self.retranslateUi(LoadingScreen)
 
@@ -138,10 +115,8 @@ class Ui_LoadingScreen(object):
     def retranslateUi(self, LoadingScreen):
         LoadingScreen.setWindowTitle(QCoreApplication.translate("LoadingScreen", u"LoadingScreen", None))
         self.label.setText(QCoreApplication.translate("LoadingScreen", u"<html><head/><body><p><br/></p></body></html>", None))
-        self.label_2.setText(QCoreApplication.translate("LoadingScreen", u"\u53cd\u65e0\u4eba\u53ca\u6d4b\u8bd5\u7cfb\u7edf", None))
+        self.label_2.setText(QCoreApplication.translate("LoadingScreen", u"<html><head/><body><p><span style=\" font-weight:700;\">\u53cd\u65e0\u4eba\u53ca\u6d4b\u8bd5\u7cfb\u7edf</span></p></body></html>", None))
         self.startButton.setText(QCoreApplication.translate("LoadingScreen", u"\u542f\u52a8", None))
-        self.pauseButton.setText(QCoreApplication.translate("LoadingScreen", u"\u6682\u505c", None))
-        self.resumeButton.setText(QCoreApplication.translate("LoadingScreen", u"\u6062\u590d", None))
         self.stopButton.setText(QCoreApplication.translate("LoadingScreen", u"\u505c\u6b62", None))
     # retranslateUi
 
