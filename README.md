@@ -29,5 +29,5 @@ poetry install --no-root
 ## 3.运行
 
 ```powershell
-poetry python main.py
+poetry run python main.py
 ```
