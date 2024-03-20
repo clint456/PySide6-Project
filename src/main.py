@@ -17,7 +17,7 @@ sys.path.append("..")
 from ui import mainUi_ui
 
 
-class Signal_terminal(QObject):
+class Signal_Gui(QObject):
     '''控制台信号'''
     text_update = Signal(str)
     
@@ -48,15 +48,15 @@ class Main(QMainWindow):
         self.setup_ui()
         
         # 实时显示输出，将控制台输出重定向到界面中
-        sys.stdout = Signal_terminal()
+        sys.stdout = Signal_Gui()
         sys.stdout.text_update.connect(self.updateText)
-        
         # 创建一个线程实例并设置名称、变量、信号槽
         self.thread1 = MyThread()
         self.thread1.setIdentity("thread1")
         self.thread1.sinOut.connect(self.outText)
         
         self.setup_btn()
+        
         
         
         
