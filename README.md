@@ -3,3 +3,7 @@
 > QtreadPool开发版本:
 >
 > 说明： `QtreadPool` 和 `QRunnable`适用于并发启动多个任务，但不方便线程间通信，这里改用 `Qthread`方案，见分支 *qthread_solution*
+
+> 启动项目：
+>
+> `poetry run python controller.py`
