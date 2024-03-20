@@ -40,7 +40,8 @@ def resetToTerminal():
     sys.stdout = stdout_temp    
 
 class Main(QMainWindow):
-    logging.set
+    # 设置
+    logging.basicConfig(level=logging.DEBUG)
   
     def __init__(self, parent = None):
         super(Main,self).__init__(parent)
@@ -72,6 +73,7 @@ class Main(QMainWindow):
     def outText(self,text):
         '''更新子线程输出'''
         print(text)
+        logging.info(text)
         
     def updateText(self,text):
         '''更新控制台输出'''
