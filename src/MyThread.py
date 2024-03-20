@@ -11,12 +11,17 @@ class MyThread(QThread):
 
     def setIdentity(self,text):
         self.identity = text
+        
+    def print_msg(self,str):
+        self.sinOut.emit(f'[{self.identity}] info : {str}')
     
     def run(self): 
-        while True:
+        while True:  
             # 发射信号
-            self.sinOut.emit(f'{self.identity} datetime is {datetime.now()}')
+            self.print_msg(datetime.now())
+            
             time.sleep(0.1)
+    
     
     def myStart(self) -> None:
         self.sinOut.emit(f'================> {self.identity} is start !!!')

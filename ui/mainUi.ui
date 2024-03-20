@@ -26,7 +26,7 @@
    <property name="styleSheet">
     <string notr="true"/>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_2">
+   <layout class="QVBoxLayout" name="verticalLayout_3">
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0">
       <property name="spacing">
@@ -76,70 +76,74 @@ li.checked::marker { content: &quot;\2612&quot;; }
             </property>
            </widget>
           </item>
-          <item alignment="Qt::AlignHCenter">
-           <widget class="QPushButton" name="start_btn">
-            <property name="text">
-             <string>启动</string>
-            </property>
-           </widget>
-          </item>
-          <item alignment="Qt::AlignHCenter">
-           <widget class="QComboBox" name="frame_sw">
-            <item>
-             <property name="text">
-              <string>视频输入</string>
-             </property>
-             <property name="icon">
-              <iconset theme="camera-video"/>
-             </property>
+          <item>
+           <layout class="QGridLayout" name="gridLayout_2">
+            <item row="1" column="0">
+             <widget class="QComboBox" name="frame_sw">
+              <item>
+               <property name="text">
+                <string>视频输入</string>
+               </property>
+               <property name="icon">
+                <iconset theme="camera-video"/>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>socket</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>video</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>local</string>
+               </property>
+              </item>
+             </widget>
             </item>
-            <item>
-             <property name="text">
-              <string>socket</string>
-             </property>
+            <item row="0" column="0">
+             <widget class="QPushButton" name="start_btn">
+              <property name="text">
+               <string>Debug启动</string>
+              </property>
+             </widget>
             </item>
-            <item>
-             <property name="text">
-              <string>video</string>
-             </property>
+            <item row="0" column="1">
+             <widget class="QPushButton" name="stop_btn">
+              <property name="text">
+               <string>debug停止</string>
+              </property>
+             </widget>
             </item>
-            <item>
-             <property name="text">
-              <string>local</string>
-             </property>
+            <item row="1" column="1">
+             <widget class="QComboBox" name="mode_sw">
+              <item>
+               <property name="text">
+                <string>模式选择</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>巡航模式</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>跟踪模式</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>开火模式</string>
+               </property>
+              </item>
+             </widget>
             </item>
-           </widget>
-          </item>
-          <item alignment="Qt::AlignHCenter">
-           <widget class="QComboBox" name="mode_sw">
-            <item>
-             <property name="text">
-              <string>模式选择</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>巡航模式</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>跟踪模式</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>开火模式</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item alignment="Qt::AlignHCenter">
-           <widget class="QPushButton" name="stop_btn">
-            <property name="text">
-             <string>紧急停止</string>
-            </property>
-           </widget>
+           </layout>
           </item>
          </layout>
         </item>

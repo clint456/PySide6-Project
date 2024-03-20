@@ -7,11 +7,12 @@ import sys
 import logging
 from datetime import datetime
 from PySide6.QtWidgets import  QApplication,QWidget,QMainWindow
-from PySide6.QtCore import Signal,QObject,QTimer,QEventLoop
+from PySide6.QtCore import Signal,QObject,QTimer,QEventLoop,Slot
 from PySide6.QtGui import QTextCursor
 from qt_material import apply_stylesheet
 
 from MyThread import MyThread
+from socketThread import socketThread
 
 sys.path.append("..")
 from ui import mainUi_ui
@@ -54,6 +55,11 @@ class Main(QMainWindow):
         self.thread1 = MyThread()
         self.thread1.setIdentity("thread1")
         self.thread1.sinOut.connect(self.outText)
+        
+        #创建一个socket线程
+        self.socket_thread = socketThread(port=8888,address="127.0.0.1")
+        self.socket_thread.setIdentity("socket_thread")
+        self.socket_thread.sinOut.connect(self.socketHandle)
      
         self.setup_btn()
         
@@ -62,16 +68,19 @@ class Main(QMainWindow):
         '''加载ui文件 初始化'''
         self.main_ui = mainUi_ui.Ui_MainWindow()
         self.main_ui.setupUi(self)
+        
     
     def setup_btn(self):
         '''按键设置'''
-        self.main_ui.start_btn.clicked.connect(self.startClick)
-        self.main_ui.stop_btn.clicked.connect(self.stopClick)
+        self.main_ui.start_btn.clicked.connect(self.startDebugClick)
+        self.main_ui.stop_btn.clicked.connect(self.stopDebugClick)
+        self.main_ui.frame_sw.highlighted.connect(self.handleCombobox)
+        
         
     def outText(self,text):
-        '''更新子线程输出'''
+        '''更新demo子线程输出'''
         print(text)
-        logging.info(text)
+        # logging.info(text)
         
     def updateText(self,text):
         '''更新控制台输出'''
@@ -81,14 +90,35 @@ class Main(QMainWindow):
         self.main_ui.debug_msg.insertPlainText(text)
         self.main_ui.debug_msg.setTextCursor(cursor)
         self.main_ui.debug_msg.ensureCursorVisible()
-
-    
-    def stopClick(self):
+        
+    def stopDebugClick(self):
+        '''定义debug窗口按键控制操作'''
         self.thread1.myStop()
         
-    def startClick(self):
-        """Runs the main function."""
+    @Slot (str) 
+    def startDebugClick(self):
         self.thread1.myStart()
+    
+    @Slot(str)
+    def socketHandle(self,text):
+        '''socket回调函数处理'''
+        print(text)
+        logging.info(text)
+    
+    #TODO视频传输切换
+    @Slot(int)    
+    def handleCombobox(self,index):
+        '''定义socket传输按键'''
+        logging.info(f'该项对应的文本为： {self.main_ui.frame_sw.itemText(index)}')
+        if(self.main_ui.frame_sw.itemText(index) == 'socket'):
+            self.socket_thread.myStart()
+        else:
+            self.socket_thread.myStop()
+            pass
+       
+    
+    #TODO 
+
         
        
     

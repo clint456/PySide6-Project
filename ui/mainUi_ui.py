@@ -16,9 +16,10 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QHBoxLayout,
-    QLabel, QMainWindow, QPushButton, QSizePolicy,
-    QStatusBar, QTextBrowser, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGridLayout,
+    QHBoxLayout, QLabel, QMainWindow, QPushButton,
+    QSizePolicy, QStatusBar, QTextBrowser, QVBoxLayout,
+    QWidget)
 import resource_rc
 
 class Ui_MainWindow(object):
@@ -37,8 +38,8 @@ class Ui_MainWindow(object):
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.centralwidget.setStyleSheet(u"")
-        self.horizontalLayout_2 = QHBoxLayout(self.centralwidget)
-        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.verticalLayout_3 = QVBoxLayout(self.centralwidget)
+        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.verticalLayout_2 = QVBoxLayout()
         self.verticalLayout_2.setSpacing(6)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
@@ -73,11 +74,8 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.debug_msg)
 
-        self.start_btn = QPushButton(self.centralwidget)
-        self.start_btn.setObjectName(u"start_btn")
-
-        self.verticalLayout.addWidget(self.start_btn, 0, Qt.AlignHCenter)
-
+        self.gridLayout_2 = QGridLayout()
+        self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.frame_sw = QComboBox(self.centralwidget)
         icon = QIcon(QIcon.fromTheme(u"camera-video"))
         self.frame_sw.addItem(icon, "")
@@ -86,7 +84,17 @@ class Ui_MainWindow(object):
         self.frame_sw.addItem("")
         self.frame_sw.setObjectName(u"frame_sw")
 
-        self.verticalLayout.addWidget(self.frame_sw, 0, Qt.AlignHCenter)
+        self.gridLayout_2.addWidget(self.frame_sw, 1, 0, 1, 1)
+
+        self.start_btn = QPushButton(self.centralwidget)
+        self.start_btn.setObjectName(u"start_btn")
+
+        self.gridLayout_2.addWidget(self.start_btn, 0, 0, 1, 1)
+
+        self.stop_btn = QPushButton(self.centralwidget)
+        self.stop_btn.setObjectName(u"stop_btn")
+
+        self.gridLayout_2.addWidget(self.stop_btn, 0, 1, 1, 1)
 
         self.mode_sw = QComboBox(self.centralwidget)
         self.mode_sw.addItem("")
@@ -95,12 +103,10 @@ class Ui_MainWindow(object):
         self.mode_sw.addItem("")
         self.mode_sw.setObjectName(u"mode_sw")
 
-        self.verticalLayout.addWidget(self.mode_sw, 0, Qt.AlignHCenter)
+        self.gridLayout_2.addWidget(self.mode_sw, 1, 1, 1, 1)
 
-        self.stop_btn = QPushButton(self.centralwidget)
-        self.stop_btn.setObjectName(u"stop_btn")
 
-        self.verticalLayout.addWidget(self.stop_btn, 0, Qt.AlignHCenter)
+        self.verticalLayout.addLayout(self.gridLayout_2)
 
 
         self.horizontalLayout.addLayout(self.verticalLayout)
@@ -112,7 +118,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.addLayout(self.horizontalLayout)
 
 
-        self.horizontalLayout_2.addLayout(self.verticalLayout_2)
+        self.verticalLayout_3.addLayout(self.verticalLayout_2)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QStatusBar(MainWindow)
@@ -136,17 +142,17 @@ class Ui_MainWindow(object):
 "li.checked::marker { content: \"\\2612\"; }\n"
 "</style></head><body style=\" font-family:'Microsoft YaHei UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
-        self.start_btn.setText(QCoreApplication.translate("MainWindow", u"\u542f\u52a8", None))
         self.frame_sw.setItemText(0, QCoreApplication.translate("MainWindow", u"\u89c6\u9891\u8f93\u5165", None))
         self.frame_sw.setItemText(1, QCoreApplication.translate("MainWindow", u"socket", None))
         self.frame_sw.setItemText(2, QCoreApplication.translate("MainWindow", u"video", None))
         self.frame_sw.setItemText(3, QCoreApplication.translate("MainWindow", u"local", None))
 
+        self.start_btn.setText(QCoreApplication.translate("MainWindow", u"Debug\u542f\u52a8", None))
+        self.stop_btn.setText(QCoreApplication.translate("MainWindow", u"debug\u505c\u6b62", None))
         self.mode_sw.setItemText(0, QCoreApplication.translate("MainWindow", u"\u6a21\u5f0f\u9009\u62e9", None))
         self.mode_sw.setItemText(1, QCoreApplication.translate("MainWindow", u"\u5de1\u822a\u6a21\u5f0f", None))
         self.mode_sw.setItemText(2, QCoreApplication.translate("MainWindow", u"\u8ddf\u8e2a\u6a21\u5f0f", None))
         self.mode_sw.setItemText(3, QCoreApplication.translate("MainWindow", u"\u5f00\u706b\u6a21\u5f0f", None))
 
-        self.stop_btn.setText(QCoreApplication.translate("MainWindow", u"\u7d27\u6025\u505c\u6b62", None))
     # retranslateUi
 
