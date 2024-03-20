@@ -8,6 +8,7 @@
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
+import sys
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
     QMetaObject, QObject, QPoint, QRect,
     QSize, QTime, QUrl, Qt)
@@ -20,6 +21,8 @@ from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGridLayout,
     QHBoxLayout, QLabel, QMainWindow, QPushButton,
     QSizePolicy, QStatusBar, QTextBrowser, QVBoxLayout,
     QWidget)
+
+sys.path.append("../resource")
 import resource_rc
 
 class Ui_MainWindow(object):
