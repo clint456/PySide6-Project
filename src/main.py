@@ -51,6 +51,8 @@ class Main(QMainWindow):
         # 实时显示输出，将控制台输出重定向到界面中
         sys.stdout = Signal_Gui()
         sys.stdout.text_update.connect(self.updateText)
+        
+        
         # 创建一个线程实例并设置名称、变量、信号槽
         self.thread1 = MyThread()
         self.thread1.setIdentity("thread1")
@@ -75,6 +77,7 @@ class Main(QMainWindow):
         self.main_ui.start_btn.clicked.connect(self.startDebugClick)
         self.main_ui.stop_btn.clicked.connect(self.stopDebugClick)
         self.main_ui.frame_sw.highlighted.connect(self.handleCombobox)
+        self.main_ui.mode_sw.highlighted.connect(self.handleModeChange)
         
         
     def outText(self,text):
@@ -105,18 +108,26 @@ class Main(QMainWindow):
         print(text)
         logging.info(text)
     
-    #TODO视频传输切换
+    #TODO 视频源切换器
     @Slot(int)    
     def handleCombobox(self,index):
-        '''定义socket传输按键'''
-        logging.info(f'该项对应的文本为： {self.main_ui.frame_sw.itemText(index)}')
-        if(self.main_ui.frame_sw.itemText(index) == 'socket'):
-            self.socket_thread.myStart()
-        else:
-            self.socket_thread.myStop()
-            pass    
+        # 获取控件当前的模式
+        mode = self.main_ui.frame_sw.itemText(index) 
+        '''判断当前该使用什么视频源输入'''
+        if(mode != "视频输入"):
+            logging.info(f'视频源设置当前为 {mode}')
+            if(mode == 'socket'):
+                self.socket_thread.myStart()
+            else:
+                self.socket_thread.myStop()
+        logging.warning("请设置视频输入模式")
+        pass    
     
-    #TODO 
+    #TODO 模式切换器
+    def handleModeChange(self,index):
+        mode = self.main_ui.mode_sw.itemText(index) 
+        '''判断当前系统运行模式'''
+        logging.info(mode)
 
         
        
