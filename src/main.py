@@ -114,8 +114,7 @@ class Main(QMainWindow):
             self.socket_thread.myStart()
         else:
             self.socket_thread.myStop()
-            pass
-       
+            pass    
     
     #TODO 
 
