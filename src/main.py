@@ -54,10 +54,8 @@ class Main(QMainWindow):
         self.thread1 = MyThread()
         self.thread1.setIdentity("thread1")
         self.thread1.sinOut.connect(self.outText)
-        
+     
         self.setup_btn()
-        
-        
         
         
     def setup_ui(self):
