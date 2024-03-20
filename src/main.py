@@ -40,12 +40,11 @@ def resetToTerminal():
     sys.stdout = stdout_temp    
 
 class Main(QMainWindow):
-    
+    logging.set
   
     def __init__(self, parent = None):
         super(Main,self).__init__(parent)
         self.setup_ui()
-
         
         # 实时显示输出，将控制台输出重定向到界面中
         sys.stdout = Signal_terminal()
@@ -57,7 +56,6 @@ class Main(QMainWindow):
         self.thread1.sinOut.connect(self.outText)
         
         self.setup_btn()
-        
         
         
         
@@ -74,7 +72,6 @@ class Main(QMainWindow):
     def outText(self,text):
         '''更新子线程输出'''
         print(text)
-        logging.info(text)
         
     def updateText(self,text):
         '''更新控制台输出'''

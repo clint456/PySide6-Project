@@ -26,7 +26,7 @@ class Ui_MainWindow(object):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(1280, 720)
-        sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
@@ -46,8 +46,11 @@ class Ui_MainWindow(object):
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.frame_label = QLabel(self.centralwidget)
         self.frame_label.setObjectName(u"frame_label")
-        sizePolicy.setHeightForWidth(self.frame_label.sizePolicy().hasHeightForWidth())
-        self.frame_label.setSizePolicy(sizePolicy)
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.frame_label.sizePolicy().hasHeightForWidth())
+        self.frame_label.setSizePolicy(sizePolicy1)
 
         self.horizontalLayout.addWidget(self.frame_label)
 
@@ -62,11 +65,11 @@ class Ui_MainWindow(object):
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.debug_msg = QTextBrowser(self.centralwidget)
         self.debug_msg.setObjectName(u"debug_msg")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Ignored, QSizePolicy.Policy.Expanding)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.debug_msg.sizePolicy().hasHeightForWidth())
-        self.debug_msg.setSizePolicy(sizePolicy1)
+        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Ignored, QSizePolicy.Policy.Expanding)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.debug_msg.sizePolicy().hasHeightForWidth())
+        self.debug_msg.setSizePolicy(sizePolicy2)
 
         self.verticalLayout.addWidget(self.debug_msg)
 
