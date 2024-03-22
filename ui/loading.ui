@@ -73,7 +73,7 @@ border-image: url(:/loader/resource/background.jpg);</string>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_5">
               <item>
-               <widget class="QComboBox" name="comboBox">
+               <widget class="QComboBox" name="ProgramComboBox">
                 <property name="font">
                  <font>
                   <pointsize>7</pointsize>

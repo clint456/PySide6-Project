@@ -55,7 +55,7 @@ class LoadWin(QWidget):
         super().__init__(parent=parent) # 初始化父类
         
         self.thread_running = False # 标记线程是否正在运行
-        self.__redefine_window_border()
+       # self.__redefine_window_border()
         self.__setup_ui()
         self.load_connect()
     
@@ -76,7 +76,8 @@ class LoadWin(QWidget):
         self.stop_btn = self.load_ui.stopButton
         self.exit_btn = self.load_ui.exitButton
         self.debug_bw = self.load_ui.debugBrowser
-        self.debug_bw.setFontPointSize(8)
+        self.select_program = self.load_ui.ProgramComboBox
+        self.debug_bw.setFontPointSize(11)
         self.debug_bw.setTextColor('white')
         
         
@@ -85,6 +86,7 @@ class LoadWin(QWidget):
         self.start_btn.clicked.connect(self.start_thread)
         self.stop_btn.clicked.connect(self.stop_thread)
         self.exit_btn.clicked.connect(self.exitProgram)
+        self.select_program.activated.connect(self.changeProgram)
         
     def setup_thread(self):
         '''创建进度条线程'''
@@ -92,7 +94,24 @@ class LoadWin(QWidget):
         # 设置进度条值
         self.thread.valueChange.connect(self.progress_bar.setValue)
         
+    @Slot(int)
+    def changeProgram(self,index):
+        '''判断当前选择启动的项目'''
+        mode = self.select_program.itemText(index) 
+        '''判断当前系统运行模式'''
+        if(mode == '反无人机' ):  
+            self.debug_msg(f'当前选择项目: [{mode}]' )
+                  
+            pass
+        elif(mode == '并联机器人'):
+            self.debug_msg(f'当前选择项目: [{mode}]' )
+            
+            pass
+        else:
+            self.debug_msg(f"请选择系统运行项目...")
         
+        
+    
     @Slot()
     def start_thread(self):
         if self.thread_running == False:

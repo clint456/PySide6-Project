@@ -146,12 +146,14 @@ class MainWin(QMainWindow):
         else:
             print("请选择系统运行模式...")
         print("当前模式: ",mode )
+        
     def closeEvent(self, event):
         '''
-        MainWindow 窗口标题
-        Are you sure to quit?窗口显示内容
-        QtGui.QMessageBox.Yes | QtGui.QMessageBox.No窗口按钮部件
-        QtGui.QMessageBox.No默认焦点停留在NO上
+        @description: 退出窗口
+        @param: MainWindow 窗口标题
+                Are you sure to quit? 窗口显示内容
+                QtGui.QMessageBox.Yes | QtGui.QMessageBox.No窗口按钮部件
+                QtGui.QMessageBox.No默认焦点停留在NO上
         '''
       
         reply = QMessageBox.question(self, 'MainWindow',
@@ -164,14 +166,4 @@ class MainWin(QMainWindow):
             event.accept()
         else:
             event.ignore()
-
-    
-def test():  
-    app = QApplication(sys.argv)
-    apply_stylesheet(app,theme='dark_blue.xml')
-    main = MainWin()
-    main.show()
-    # 应用关闭时返回0,sys关闭进程
-    sys.exit(app.exec())
-
-test()
+            
