@@ -11,8 +11,8 @@ from PySide6.QtCore import Signal,QObject,QTimer,QEventLoop,Slot
 from PySide6.QtGui import QTextCursor
 from qt_material import apply_stylesheet
 
-from src.MyThread import MyThread 
-from src.socketThread import socketThread
+from thr.MyThread import MyThread 
+from thr.socketThread import socketThread
 
 from ui.mainUi_ui import Ui_MainWindow
 
@@ -88,7 +88,7 @@ class MainWin(QMainWindow):
     def updateText(self,text):
         '''更新控制台输出'''
         cursor = self.main_ui.debug_msg.textCursor()
-        self.main_ui.debug_msg.setFontPointSize(7)
+        self.main_ui.debug_msg.setFontPointSize(11)
         self.main_ui.debug_msg.setTextColor('white')
         self.main_ui.debug_msg.append(f'{text}')
         self.main_ui.debug_msg.setTextCursor(cursor)
@@ -115,19 +115,23 @@ class MainWin(QMainWindow):
         '''判断当前该使用什么视频源输入'''
         if(mode != "视频输入"):
             if(mode == 'socket'):
+                print(f"当前视频源: {mode}")
                 self.socket_thread.myStart()          
             else:
                 self.socket_thread.myStop()   
                           
             if(mode == 'video'):
                 #TODO 读取视频路径
+                print(f"当前视频源: {mode}")
+                
                 pass
             
             if(mode == 'local'):
                 #TODO 打开usb摄像机
+                print(f"当前视频源: {mode}")
                 pass
             
-            print("当前视频源:",mode)
+            
         else: 
             print("请设置视频输入模式....")
    
@@ -137,15 +141,17 @@ class MainWin(QMainWindow):
     def handleModeChange(self,index):
         mode = self.main_ui.mode_sw.itemText(index) 
         '''判断当前系统运行模式'''
-        if(mode == '巡航模式' ):        
+        if(mode == '巡航模式' ): 
+            print(f"当前模式: {mode}" )       
             pass
         elif(mode == '跟踪模式'):
+            print(f"当前模式: {mode}" )
             pass
         elif(mode == '开门火模式'):
+            print(f"当前模式: {mode}" )
             pass
         else:
             print("请选择系统运行模式...")
-        print("当前模式: ",mode )
         
     def closeEvent(self, event):
         '''
