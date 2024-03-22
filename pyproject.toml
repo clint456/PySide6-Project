@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "pyside6projcet"
+version = "0.1.0"
+description = "linux 测试"
+authors = ["qinwen <19985813415@163.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.12"
+pyside6 = "^6.4.2"
+keyboard = "^0.13.5"
+qt-material = "^2.14"
+
+
+[[tool.poetry.source]]
+name = "pyside6projcet"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+priority = "primary"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

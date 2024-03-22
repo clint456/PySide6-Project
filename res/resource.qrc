@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="loader">
+    <file>../resource/background.jpg</file>
+    <file>../resource/res/image/bg_home_header.png</file>
+  </qresource>
+</RCC>
