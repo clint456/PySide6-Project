@@ -8,7 +8,7 @@ class MyThread(QThread):
         调用步骤： 
             1.创建线程对象 <thread_name> = MyThread()
             2.设置线程名称 <thread_name>.setIdentity(str(thread_name))
-            3.设置回调函数 接收子线程数据 
+            3.通过自定义信号与槽 设置回调函数 接收子线程数据 
     说明：如果需要添加功能，建议继承该模块，添加具体功能
     '''
     sinOut = Signal(str)
