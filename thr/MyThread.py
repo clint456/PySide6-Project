@@ -4,12 +4,16 @@ from PySide6.QtCore import QThread,Signal
 
 class MyThread(QThread):
     '''
-    子线程接口类：
+    @description:
+    子线程自定义接口类：
         调用步骤： 
             1.创建线程对象 <thread_name> = MyThread()
             2.设置线程名称 <thread_name>.setIdentity(str(thread_name))
             3.设置回调函数 接收子线程数据 
     说明：如果需要添加功能，建议继承该模块，添加具体功能
+    
+    @param: setIdentity 设置线程名称
+    @return 
     '''
     sinOut = Signal(str)
 

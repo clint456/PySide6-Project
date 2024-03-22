@@ -8,7 +8,6 @@ import sys
 from PySide6.QtWidgets import QApplication
 from qt_material import apply_stylesheet
 
-from win.loadWin import LoadWin
 from win.mainWin import MainWin
 
 

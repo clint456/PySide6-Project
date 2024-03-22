@@ -8,8 +8,6 @@ import logging
 from datetime import datetime
 from PySide6.QtWidgets import  QApplication,QWidget,QMainWindow,QMessageBox
 from PySide6.QtCore import Signal,QObject,QTimer,QEventLoop,Slot
-from PySide6.QtGui import QTextCursor
-from qt_material import apply_stylesheet
 
 from thr.MyThread import MyThread 
 from thr.socketThread import socketThread
@@ -82,7 +80,6 @@ class MainWin(QMainWindow):
     def outText(self,text):
         '''更新demo子线程输出'''
         print(text)
-        # logging.info(text)
     
     @Slot(str)  
     def updateText(self,text):
@@ -142,13 +139,16 @@ class MainWin(QMainWindow):
         mode = self.main_ui.mode_sw.itemText(index) 
         '''判断当前系统运行模式'''
         if(mode == '巡航模式' ): 
-            print(f"当前模式: {mode}" )       
+            print(f"当前模式: {mode}" )   
+                
             pass
         elif(mode == '跟踪模式'):
             print(f"当前模式: {mode}" )
+            
             pass
         elif(mode == '开门火模式'):
             print(f"当前模式: {mode}" )
+            
             pass
         else:
             print("请选择系统运行模式...")

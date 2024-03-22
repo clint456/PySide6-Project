@@ -1,7 +1,7 @@
 import socket
 import time
 
-from .MyThread import MyThread
+from thr.MyThread import MyThread
 
 class socketThread(MyThread):
     '''socket通信线程'''
