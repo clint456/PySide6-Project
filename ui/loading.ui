@@ -63,6 +63,11 @@ border-image: url(:/loader/resource/background.jpg);</string>
           <layout class="QVBoxLayout" name="verticalLayout_3">
            <item>
             <widget class="QGroupBox" name="groupBox">
+             <property name="font">
+              <font>
+               <pointsize>7</pointsize>
+              </font>
+             </property>
              <property name="title">
               <string/>
              </property>
@@ -71,7 +76,7 @@ border-image: url(:/loader/resource/background.jpg);</string>
                <widget class="QComboBox" name="comboBox">
                 <property name="font">
                  <font>
-                  <pointsize>9</pointsize>
+                  <pointsize>7</pointsize>
                   <hintingpreference>PreferDefaultHinting</hintingpreference>
                  </font>
                 </property>
@@ -113,6 +118,13 @@ border-image: url(:/loader/resource/background.jpg);</string>
                   <verstretch>0</verstretch>
                  </sizepolicy>
                 </property>
+                <property name="text">
+                 <string>停止</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="exitButton">
                 <property name="text">
                  <string>退出</string>
                 </property>
@@ -203,7 +215,7 @@ border-image: url(:/loader/resource/background.jpg);</string>
   </layout>
  </widget>
  <resources>
-  <include location="../resource/resource.qrc"/>
+  <include location="../res/resource.qrc"/>
  </resources>
  <connections/>
 </ui>

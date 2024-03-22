@@ -6,8 +6,10 @@
 import sys
 
 from PySide6.QtWidgets import QApplication
-from src import loadWin,mainWin
 from qt_material import apply_stylesheet
+
+from src.loadWin import LoadWin
+from src.mainWin import MainWin
 
 
 
@@ -15,8 +17,8 @@ from qt_material import apply_stylesheet
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     apply_stylesheet(app,theme='dark_blue.xml')  
-    #mainWin.MainWin().show()
-    loadWin.LoadWin().show()   
+    MainWin().show()
+
     app.exec()
 
 

@@ -7,8 +7,7 @@ from PySide6.QtGui import Qt
 
 from qt_material import apply_stylesheet
 
-sys.path.append('..')
-from ui import loading_ui
+from ui.loading_ui import Ui_LoadingScreen
 
 class LoaderThread(QThread):
     '''进度条加载线程'''
@@ -58,8 +57,7 @@ class LoadWin(QWidget):
         self.thread_running = False # 标记线程是否正在运行
         self.__redefine_window_border()
         self.__setup_ui()
-        self.__load_connect()
-        self.__setup_thread()
+        self.load_connect()
     
     def __redefine_window_border(self):
         '''
@@ -70,49 +68,64 @@ class LoadWin(QWidget):
     
     def __setup_ui(self):
         '''初始化designer组件'''
-        self.load_ui = loading_ui.Ui_LoadingScreen()
+        self.load_ui = Ui_LoadingScreen()
         self.load_ui.setupUi(self) # 初始化designer界面
         # 获取designer界面组件对象
         self.progress_bar = self.load_ui.loadProgressBar
         self.start_btn = self.load_ui.startButton
         self.stop_btn = self.load_ui.stopButton
+        self.exit_btn = self.load_ui.exitButton
         self.debug_bw = self.load_ui.debugBrowser
-        #self.debug_bw.setFontPointSize(7)
+        self.debug_bw.setFontPointSize(8)
         self.debug_bw.setTextColor('white')
         
         
-    def __load_connect(self):
+    def load_connect(self):
         '''初始化连接信号与槽'''
         self.start_btn.clicked.connect(self.start_thread)
         self.stop_btn.clicked.connect(self.stop_thread)
+        self.exit_btn.clicked.connect(self.exitProgram)
         
-    def __setup_thread(self):
+    def setup_thread(self):
         '''创建进度条线程'''
         self.thread = LoaderThread()
         # 设置进度条值
         self.thread.valueChange.connect(self.progress_bar.setValue)
-        self.thread_running = True
         
         
     @Slot()
     def start_thread(self):
-        self.debug_msg("===============> 进度条线程启动")
-        if self.thread_running:
+        if self.thread_running == False:
+            self.debug_msg("===============> 进度条线程启动！！！")
+            self.setup_thread()
             self.thread.start()
+            self.thread_running = True
+        else:
+            self.debug_msg("===============> 进度条线程已经启动！！！")
         
-        if not self.thread_running:
-            self.thread.start()
-       
         
     
     @Slot()
     def stop_thread(self):
         # 结束
-        self.thread.terminate()
-        sys.exit()
-        
+        if self.thread_running == True:
+            self.thread.terminate()
+            self.debug_msg("================> 进度条线程关闭！！！")
+            self.thread_running = False
+        else:
+            self.debug_msg("===============> 进度条线程已经关闭！！！")
+            
+    @Slot()
+    def exitProgram(self):
+       if self.thread_running == True:
+            self.thread.quit()
+            self.debug_msg("================> 进度条线程已关闭！！！")
+            sys.exit()
+       else:
+            sys.exit()
+            
     def debug_msg(self,str):
-        self.debug_bw.setText(str)
+        self.debug_bw.append(str)
         
         
 def test():
@@ -122,4 +135,4 @@ def test():
     load.show()
     app.exec()
         
-# test()
+#test()

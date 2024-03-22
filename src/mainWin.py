@@ -11,11 +11,10 @@ from PySide6.QtCore import Signal,QObject,QTimer,QEventLoop,Slot
 from PySide6.QtGui import QTextCursor
 from qt_material import apply_stylesheet
 
-from . import MyThread 
-from . import socketThread
+from src.MyThread import MyThread 
+from src.socketThread import socketThread
 
-sys.path.append("..")
-from ui import mainUi_ui
+from ui.mainUi_ui import Ui_MainWindow
 
 
 class Signal_Gui(QObject):
@@ -54,12 +53,12 @@ class MainWin(QMainWindow):
         
         
         # 创建一个线程实例并设置名称、变量、信号槽
-        self.thread1 = MyThread.MyThread()
+        self.thread1 = MyThread()
         self.thread1.setIdentity("thread1")
         self.thread1.sinOut.connect(self.outText)
         
         #创建一个socket线程
-        self.socket_thread = socketThread.socketThread(port=8888,address="127.0.0.1")
+        self.socket_thread =socketThread(port=8888,address="127.0.0.1")
         self.socket_thread.setIdentity("socket_thread")
         self.socket_thread.sinOut.connect(self.socketHandle)
      
@@ -68,7 +67,7 @@ class MainWin(QMainWindow):
         
     def setup_ui(self):
         '''加载ui文件 初始化'''
-        self.main_ui = mainUi_ui.Ui_MainWindow()
+        self.main_ui = Ui_MainWindow()
         self.main_ui.setupUi(self)
         
     
@@ -175,4 +174,4 @@ def test():
     # 应用关闭时返回0,sys关闭进程
     sys.exit(app.exec())
 
-# test()
+test()

@@ -19,8 +19,7 @@ from PySide6.QtWidgets import (QApplication, QComboBox, QGridLayout, QGroupBox,
     QHBoxLayout, QLabel, QProgressBar, QPushButton,
     QSizePolicy, QSpacerItem, QTextBrowser, QVBoxLayout,
     QWidget)
-
-from res import resource_rc
+import resource_rc
 
 class Ui_LoadingScreen(object):
     def setupUi(self, LoadingScreen):
@@ -60,6 +59,9 @@ class Ui_LoadingScreen(object):
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.groupBox = QGroupBox(LoadingScreen)
         self.groupBox.setObjectName(u"groupBox")
+        font = QFont()
+        font.setPointSize(7)
+        self.groupBox.setFont(font)
         self.verticalLayout_5 = QVBoxLayout(self.groupBox)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.comboBox = QComboBox(self.groupBox)
@@ -67,10 +69,10 @@ class Ui_LoadingScreen(object):
         self.comboBox.addItem("")
         self.comboBox.addItem("")
         self.comboBox.setObjectName(u"comboBox")
-        font = QFont()
-        font.setPointSize(6)
-        font.setHintingPreference(QFont.PreferDefaultHinting)
-        self.comboBox.setFont(font)
+        font1 = QFont()
+        font1.setPointSize(7)
+        font1.setHintingPreference(QFont.PreferDefaultHinting)
+        self.comboBox.setFont(font1)
         self.comboBox.setMaxVisibleItems(11)
 
         self.verticalLayout_5.addWidget(self.comboBox)
@@ -89,6 +91,11 @@ class Ui_LoadingScreen(object):
         self.stopButton.setSizePolicy(sizePolicy1)
 
         self.verticalLayout_5.addWidget(self.stopButton)
+
+        self.exitButton = QPushButton(self.groupBox)
+        self.exitButton.setObjectName(u"exitButton")
+
+        self.verticalLayout_5.addWidget(self.exitButton)
 
 
         self.verticalLayout_3.addWidget(self.groupBox)
@@ -164,6 +171,7 @@ class Ui_LoadingScreen(object):
 
         self.comboBox.setCurrentText(QCoreApplication.translate("LoadingScreen", u"\u9879\u76ee\u9009\u62e9", None))
         self.startButton.setText(QCoreApplication.translate("LoadingScreen", u"\u542f\u52a8", None))
-        self.stopButton.setText(QCoreApplication.translate("LoadingScreen", u"\u9000\u51fa", None))
+        self.stopButton.setText(QCoreApplication.translate("LoadingScreen", u"\u505c\u6b62", None))
+        self.exitButton.setText(QCoreApplication.translate("LoadingScreen", u"\u9000\u51fa", None))
     # retranslateUi
 
