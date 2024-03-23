@@ -154,17 +154,17 @@ class LoadWin(QWidget,QThread):
             self.setup_mainWin_thread()
             self.mainWin_thread.myStart()
             self.mainWin_thread_running = True
-            self.debug_msg("===============> mainWindow线程启动！！！")
+            self.debug_msg("===============> mainWindow线程启动!!!")
         else:
-            self.debug_msg("===============> mainWindow线程已经启动！！！")
+            self.debug_msg("===============> mainWindow线程已经启动!!!")
     def stop_mainWin_thread(self):
         # 结束
         if self.mainWin_thread_running == True:
             self.mainWin_thread.terminate()
-            self.debug_msg("================> mainWindow线程关闭！！！")
+            self.debug_msg("================> mainWindow线程关闭!!!")
             self.mainWin_thread_running = False
         else:
-            self.debug_msg("===============> mainWindow线程已经关闭！！！")         
+            self.debug_msg("===============> mainWindow线程已经关闭!!!")         
     def send_mainWin_show(self):  
         '''
         @description:控制主窗口显示还是关闭,
@@ -178,14 +178,11 @@ class LoadWin(QWidget,QThread):
             '''在这里释放所有线程'''
             self.bar_thread.quit()
             self.mainWin_thread.quit()
-            self.debug_msg("================> 所有线程已关闭！！！")
+            self.debug_msg("================> 所有线程已关闭!!!")
             
             sys.exit()
        else:
             sys.exit()
-    def run(self):
-        while True
-        
         
 def test():
     app = QApplication()
