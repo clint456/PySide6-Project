@@ -1,23 +1,25 @@
 import socket
 import time
-from PySide6.QtCore import Signal
+import sys
+
+
+from PySide6.QtWidgets import QApplication
+from qt_material import apply_stylesheet
+
+from win.mainWin import MainWin
 
 from thr.MyThread import MyThread
 
 class mainWinThread(MyThread):
-    '''启动mainWindow的入口线程'''
+    """启动mainWindow的入口线程"""
 
-    
-    def __init__(self,parent=None):
+    def __init__(self, parent=None):
         super().__init__(parent=parent)
-        self.signal_show = False 
-        self.print_msg("mainWindow线程启动")
+        self.signal_show = False
+
     def run(self):
+        self.print_msg("======================")
         
-        while True:
-            
-            
-            time.sleep(1)
-            pass
-        
-    
+        self.main = MainWin()
+        self.main.show()
+        self.main.exec()

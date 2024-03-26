@@ -37,7 +37,7 @@ def resetToTerminal():
     '''还原重定向'''
     sys.stdout = stdout_temp    
 
-class MainWin(QMainWindow):
+class MainWin(QWidget):
     # 设置
     logging.basicConfig(level=logging.DEBUG)
   
@@ -146,7 +146,7 @@ class MainWin(QMainWindow):
             print(f"当前模式: {mode}" )
             
             pass
-        elif(mode == '开门火模式'):
+        elif(mode == '开火模式'):
             print(f"当前模式: {mode}" )
             
             pass

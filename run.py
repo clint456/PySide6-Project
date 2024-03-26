@@ -10,8 +10,6 @@ from qt_material import apply_stylesheet
 
 from win.loadWin import LoadWin
 
-
-
 # Run
 if __name__ == '__main__':
     app = QApplication()

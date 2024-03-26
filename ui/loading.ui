@@ -215,7 +215,7 @@ border-image: url(:/loader/resource/background.jpg);</string>
   </layout>
  </widget>
  <resources>
-  <include location="../res/resource.qrc"/>
+  <include location="../resource_rc/resource.qrc"/>
  </resources>
  <connections/>
 </ui>

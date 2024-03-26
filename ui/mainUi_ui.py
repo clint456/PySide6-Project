@@ -17,9 +17,8 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
 from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGridLayout,
-    QHBoxLayout, QLabel, QMainWindow, QPushButton,
-    QSizePolicy, QStatusBar, QTextBrowser, QVBoxLayout,
-    QWidget)
+    QHBoxLayout, QLabel, QPushButton, QSizePolicy,
+    QStatusBar, QTextBrowser, QVBoxLayout, QWidget)
 import resource_rc
 
 class Ui_MainWindow(object):
@@ -35,17 +34,16 @@ class Ui_MainWindow(object):
         MainWindow.setStyleSheet(u"")
         self.actionchose_input = QAction(MainWindow)
         self.actionchose_input.setObjectName(u"actionchose_input")
-        self.centralwidget = QWidget(MainWindow)
-        self.centralwidget.setObjectName(u"centralwidget")
-        self.centralwidget.setStyleSheet(u"")
-        self.verticalLayout_3 = QVBoxLayout(self.centralwidget)
+        self.verticalLayout_4 = QVBoxLayout(MainWindow)
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.verticalLayout_3 = QVBoxLayout()
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.verticalLayout_2 = QVBoxLayout()
         self.verticalLayout_2.setSpacing(6)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.frame_label = QLabel(self.centralwidget)
+        self.frame_label = QLabel(MainWindow)
         self.frame_label.setObjectName(u"frame_label")
         sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         sizePolicy1.setHorizontalStretch(0)
@@ -55,7 +53,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.frame_label)
 
-        self.line = QFrame(self.centralwidget)
+        self.line = QFrame(MainWindow)
         self.line.setObjectName(u"line")
         self.line.setFrameShape(QFrame.VLine)
         self.line.setFrameShadow(QFrame.Sunken)
@@ -64,7 +62,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout = QVBoxLayout()
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.debug_msg = QTextBrowser(self.centralwidget)
+        self.debug_msg = QTextBrowser(MainWindow)
         self.debug_msg.setObjectName(u"debug_msg")
         sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Ignored, QSizePolicy.Policy.Expanding)
         sizePolicy2.setHorizontalStretch(0)
@@ -76,7 +74,7 @@ class Ui_MainWindow(object):
 
         self.gridLayout_2 = QGridLayout()
         self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.frame_sw = QComboBox(self.centralwidget)
+        self.frame_sw = QComboBox(MainWindow)
         icon = QIcon(QIcon.fromTheme(u"camera-video"))
         self.frame_sw.addItem(icon, "")
         self.frame_sw.addItem("")
@@ -86,18 +84,19 @@ class Ui_MainWindow(object):
 
         self.gridLayout_2.addWidget(self.frame_sw, 1, 0, 1, 1)
 
-        self.start_btn = QPushButton(self.centralwidget)
+        self.start_btn = QPushButton(MainWindow)
         self.start_btn.setObjectName(u"start_btn")
 
         self.gridLayout_2.addWidget(self.start_btn, 0, 0, 1, 1)
 
-        self.stop_btn = QPushButton(self.centralwidget)
+        self.stop_btn = QPushButton(MainWindow)
         self.stop_btn.setObjectName(u"stop_btn")
 
         self.gridLayout_2.addWidget(self.stop_btn, 0, 1, 1, 1)
 
-        self.mode_sw = QComboBox(self.centralwidget)
-        self.mode_sw.addItem("")
+        self.mode_sw = QComboBox(MainWindow)
+        icon1 = QIcon(QIcon.fromTheme(u"preferences"))
+        self.mode_sw.addItem(icon1, "")
         self.mode_sw.addItem("")
         self.mode_sw.addItem("")
         self.mode_sw.addItem("")
@@ -120,10 +119,14 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addLayout(self.verticalLayout_2)
 
-        MainWindow.setCentralWidget(self.centralwidget)
+
+        self.verticalLayout_4.addLayout(self.verticalLayout_3)
+
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
-        MainWindow.setStatusBar(self.statusbar)
+
+        self.verticalLayout_4.addWidget(self.statusbar)
+
 
         self.retranslateUi(MainWindow)
 
@@ -140,7 +143,7 @@ class Ui_MainWindow(object):
 "hr { height: 1px; border-width: 0; }\n"
 "li.unchecked::marker { content: \"\\2610\"; }\n"
 "li.checked::marker { content: \"\\2612\"; }\n"
-"</style></head><body style=\" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
+"</style></head><body style=\" font-family:'UbuntuMono Nerd Font'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Microsoft YaHei UI'; font-size:9pt;\"><br /></p></body></html>", None))
         self.frame_sw.setItemText(0, QCoreApplication.translate("MainWindow", u"\u89c6\u9891\u8f93\u5165", None))
         self.frame_sw.setItemText(1, QCoreApplication.translate("MainWindow", u"socket", None))
