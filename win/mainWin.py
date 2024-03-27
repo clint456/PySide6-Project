@@ -173,3 +173,5 @@ class MainWin(QWidget):
         else:
             event.ignore()
             
+            
+    

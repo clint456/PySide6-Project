@@ -2,8 +2,6 @@ import socket
 import time
 import sys
 
-
-from PySide6.QtWidgets import QApplication
 from qt_material import apply_stylesheet
 
 from win.mainWin import MainWin
@@ -18,8 +16,7 @@ class mainWinThread(MyThread):
         self.signal_show = False
 
     def run(self):
-        self.print_msg("======================")
-        
         self.main = MainWin()
         self.main.show()
         self.main.exec()
+        
