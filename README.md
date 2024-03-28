@@ -87,8 +87,13 @@ QBasicTimer::start: Timers cannot be started from another thread
 > 1. 放弃模块化的并行设计，只对特定耗时的任务上使用多线程 
 >     - [实现快，可复用性差，可行性高]
 > 2. 尝试Multiprocessing模块，使用进程管理
->     - [实现慢，可复用性高，不确定能不能成功]
+>     - [实现慢，可复用性高，可行性一般]
 > 3. 使用stalkless版本的python ,利用协程来解决这个问题
 >     - [专为并行而设计的Python版本，可以后期了解一下]
 
---- 
+#### 尝试（方案一）：
+> 只在主页面中写GUI，然后在子页面中启动线程，用于各种需要等待的耗时操作。
+
+【2024.3.28 10：58：23】 此方案很可以，问题解决！
+![image](image/twoWindow.png)
+

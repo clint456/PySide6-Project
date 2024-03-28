@@ -16,17 +16,11 @@ from ui.mainUi_ui import Ui_MainWindow
 
 
 class Signal_Gui(QObject):
-    '''控制台信号'''
+    '''重定向终端到Text Widget'''
     text_update = Signal(str)
     
     def write(self,text):
         self.text_update.emit(str(text))
-        '''ProcessEventsFlag'''
-        loop = QEventLoop()
-        # 调节刷新速度
-        QTimer.singleShot(10, loop.quit)
-        loop.exec()
-        QApplication.processEvents()
         
     def flush(self):
         pass
@@ -37,12 +31,12 @@ def resetToTerminal():
     '''还原重定向'''
     sys.stdout = stdout_temp    
 
-class MainWin(QWidget):
+class AntiDrone(QWidget):
     # 设置
     logging.basicConfig(level=logging.DEBUG)
   
     def __init__(self, parent = None):
-        super(MainWin,self).__init__(parent)
+        super(AntiDrone,self).__init__(parent)
         self.setup_ui()
         
         # 实时显示输出，将控制台输出重定向到界面中
@@ -119,16 +113,13 @@ class MainWin(QWidget):
                           
             if(mode == 'video'):
                 #TODO 读取视频路径
-                print(f"当前视频源: {mode}")
-                
+                print(f"当前视频源: {mode}")         
                 pass
             
             if(mode == 'local'):
                 #TODO 打开usb摄像机
                 print(f"当前视频源: {mode}")
-                pass
-            
-            
+                pass    
         else: 
             print("请设置视频输入模式....")
    
