@@ -6,11 +6,21 @@
 import sys
 import logging
 from datetime import datetime
-from PySide6.QtWidgets import  QApplication,QWidget,QMainWindow,QMessageBox
-from PySide6.QtCore import Signal,QObject,QTimer,QEventLoop,Slot
-
+from PySide6.QtWidgets import  (
+    QApplication,
+    QWidget,
+    QMainWindow
+    ,QMessageBox
+)
+from PySide6.QtCore import (
+    Signal,
+    QObject,
+    QTimer,
+    QEventLoop,
+    Slot
+)
 from thr.MyThread import MyThread 
-from thr.socketThread import socketThread
+from thr.receiveFrameThread import  ReceiveFrame
 
 from ui.mainUi_ui import Ui_MainWindow
 
@@ -32,39 +42,35 @@ def resetToTerminal():
     sys.stdout = stdout_temp    
 
 class AntiDrone(QWidget):
-    # 设置
+    # 设置日志输出模式 
+    # logging 输出到终端， print 输出到GUI终端页面
     logging.basicConfig(level=logging.DEBUG)
   
     def __init__(self, parent = None):
         super(AntiDrone,self).__init__(parent)
-        self.setup_ui()
+        self.__setup_ui()  
+        self.__setup_out_to_widget()
+        self.setup_FrameReceiveSocket(port=8888,address="127.0.0.1")
+        self.setup_btn()
         
+    def setup_FrameReceiveSocket(self,port,address):
+        #创建一个socket线程
+        self.frameReceiveThread =ReceiveFrame(port,address)
+        self.frameReceiveThread.setIdentity("socket_thread")
+        self.frameReceiveThread.sinOut.connect(self.frameReceiveHandle)
+        
+    def __setup_out_to_widget(self):
         # 实时显示输出，将控制台输出重定向到界面中
         sys.stdout = Signal_Gui()
         sys.stdout.text_update.connect(self.updateText)
         
-        
-        # 创建一个线程实例并设置名称、变量、信号槽
-        self.thread1 = MyThread()
-        self.thread1.setIdentity("thread1")
-        self.thread1.sinOut.connect(self.outText)
-        
-        #创建一个socket线程
-        self.socket_thread =socketThread(port=8888,address="127.0.0.1")
-        self.socket_thread.setIdentity("socket_thread")
-        self.socket_thread.sinOut.connect(self.socketHandle)
-     
-        self.setup_btn()
-        
-        
-    def setup_ui(self):
+    def __setup_ui(self):
         '''加载ui文件 初始化'''
         self.main_ui = Ui_MainWindow()
         self.main_ui.setupUi(self)
-        
     
     def setup_btn(self):
-        '''按键设置'''
+        '''信号连接'''
         self.main_ui.start_btn.clicked.connect(self.startDebugClick)
         self.main_ui.stop_btn.clicked.connect(self.stopDebugClick)
         self.main_ui.frame_sw.activated.connect(self.handleCombobox)
@@ -72,7 +78,8 @@ class AntiDrone(QWidget):
         
     @Slot(str)  
     def outText(self,text):
-        '''更新demo子线程输出'''
+        '''更新demo子线程输出
+            (此时stdout已经绑定到了GUI终端上'''
         print(text)
     
     @Slot(str)  
@@ -87,13 +94,13 @@ class AntiDrone(QWidget):
      
     def stopDebugClick(self):
         '''定义debug窗口按键控制操作'''
-        self.thread1.myStop()
+        pass
         
     def startDebugClick(self):
-        self.thread1.myStart()
+        pass
     
     @Slot(str)
-    def socketHandle(self,text):
+    def frameReceiveHandle(self,text):
         '''socket回调函数处理'''
         print(text)
         logging.info(text)
@@ -107,9 +114,9 @@ class AntiDrone(QWidget):
         if(mode != "视频输入"):
             if(mode == 'socket'):
                 print(f"当前视频源: {mode}")
-                self.socket_thread.myStart()          
+                self.frameReceiveThread.myStart()          
             else:
-                self.socket_thread.myStop()   
+                self.frameReceiveThread.myStop()   
                           
             if(mode == 'video'):
                 #TODO 读取视频路径

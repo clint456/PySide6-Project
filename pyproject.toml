@@ -10,6 +10,7 @@ python = ">=3.10,<3.12"
 pyside6 = "^6.4.2"
 keyboard = "^0.13.5"
 qt-material = "^2.14"
+opencv-python = "^4.9.0.80"
 
 
 [[tool.poetry.source]]

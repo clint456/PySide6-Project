@@ -44,21 +44,23 @@ poetry install --no-root
 
 > `win/mainWin.py` 为反无人机操作页面
 >
-> 运行：`python main_test.py`
->
+> 运行: `python main_test.py`
+
+> `run.py` 为系统启动入口
+> 
+> 运行: `python run.py`
 
 ---
 ## 4.待完成的任务
-1. 使用`run.py` 启动 `win/loadWin.py`,然后通过`class loadWin`再开启`class mainWin`
-2. `thr/socketThread.py`数据传输模块测试
+1. 使用`run.py` 启动 `win/loadWin.py`,然后通过`class loadWin`再开启`class mainWin` 【2024.3.28 done】
+2. `thr/socketThread.py`数据传输模块测试 
 3. 添加一个实时显示下位机云台状态的动画
 
 --- 
-## BUG日志
+## 5.BUG日志
 
-### Bug1 -- 2024.3.25
-> `run.py` 希望作为系统启动入口
->
+### Bug1 -- 2024.3.25 【已解决】
+
 > 但目前还有bug，问题是：
 >  - 主线程的子线程里，貌似不能再启动子线程【还未解决】
 > 
@@ -94,6 +96,6 @@ QBasicTimer::start: Timers cannot be started from another thread
 #### 尝试（方案一）：
 > 只在主页面中写GUI，然后在子页面中启动线程，用于各种需要等待的耗时操作。
 
-【2024.3.28 10：58：23】 此方案很可以，问题解决！
+【2024.3.28 10：58：23】 此方案可行，问题解决！
 ![image](image/twoWindow.png)
 

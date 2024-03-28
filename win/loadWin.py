@@ -83,6 +83,7 @@ class LoadWin(QWidget):
             self.debug_msg(f'反无人机项目启动')
             self.start_antiDrone()
         elif self.current_project_index == 2:
+            #TODO 并联机器人项目
             self.debug_msg(f'并联机器人项目待开发...')
         else:
             self.debug_msg(f'项目启动，出现未知错误') 
@@ -186,7 +187,6 @@ class LoaderThread(QThread):
                 if self.progress_value >= 100:
                     self.progress_value = 0
                     self.set_loadComplete(True)
-                    print("================> 加载完成")
                     return  # 当进度条增加为100时，返回并退出线程
                 else:
                     self.set_loadComplete(False)
