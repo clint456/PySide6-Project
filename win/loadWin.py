@@ -76,17 +76,20 @@ class LoadWin(QWidget):
                 
     def startCurrentProject(self):
         '''启动项目'''
-        self.start_bar_thread()
-        if self.current_project_index == 0: 
-            self.debug_msg(f'请选择当前要启动的项目！！！')
-        elif self.current_project_index == 1:
-            self.debug_msg(f'反无人机项目启动')
-            self.start_antiDrone()
-        elif self.current_project_index == 2:
-            #TODO 并联机器人项目
-            self.debug_msg(f'并联机器人项目待开发...')
+        if(self.bar_thread_running):
+             self.debug_msg("===============> 不得重复加载！！！")
         else:
-            self.debug_msg(f'项目启动，出现未知错误') 
+            if self.current_project_index == 0: 
+                self.debug_msg(f'请选择当前要启动的项目！！！')
+            elif self.current_project_index == 1:
+                self.start_bar_thread()
+                self.debug_msg(f'反无人机项目启动')     
+                self.start_antiDrone()
+            elif self.current_project_index == 2:
+                #TODO 并联机器人项目
+                self.debug_msg(f'并联机器人项目待开发...')
+            else:
+                self.debug_msg(f'项目启动，出现未知错误') 
     
     
     # 项目切换控制器
@@ -133,8 +136,9 @@ class LoadWin(QWidget):
     @Slot()
     def stopAllThread(self):
         """在这里将所有线程暂停/停止"""
-        self.stop_bar_thread()
-        self.currentProject.close()
+        if(self.bar_thread_running):
+            self.stop_bar_thread()
+            self.currentProject.close()
    
     # 关闭所有线程
     @Slot()
@@ -192,7 +196,7 @@ class LoaderThread(QThread):
                     self.set_loadComplete(False)
                     self.progress_value += 1
                     self.valueChange.emit(self.progress_value)  # 发送进度条值变化
-                    time.sleep(0.1)
+                    time.sleep(0.01)
 
 
 

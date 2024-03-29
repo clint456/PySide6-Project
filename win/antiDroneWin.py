@@ -48,16 +48,25 @@ class AntiDrone(QWidget):
   
     def __init__(self, parent = None):
         super(AntiDrone,self).__init__(parent)
+        self.currentSource = 0 
         self.__setup_ui()  
         self.__setup_out_to_widget()
-        self.setup_FrameReceiveSocket(port=8888,address="127.0.0.1")
+        self.setup_FrameReceiveSocket(port=5555,address="127.0.0.1") # 视频接收线程初始化
         self.setup_btn()
         
     def setup_FrameReceiveSocket(self,port,address):
-        #创建一个socket线程
-        self.frameReceiveThread =ReceiveFrame(port,address)
+        '''创建图像接受线程'''
+        self.frameReceiveThread =ReceiveFrame(port=port,address=address)
         self.frameReceiveThread.setIdentity("socket_thread")
         self.frameReceiveThread.sinOut.connect(self.frameReceiveHandle)
+        self.frameReceiveThread.SignalFrame.connect(self.updateFrame)
+        
+    def updateFrame(self,Frame):
+        '''控制视频流切换'''
+        if(self.currentSource == 1):
+            self.main_ui.frame_label.setPixmap(Frame)
+        else:
+            print("请选择======视频输入模式")
         
     def __setup_out_to_widget(self):
         # 实时显示输出，将控制台输出重定向到界面中
@@ -111,26 +120,30 @@ class AntiDrone(QWidget):
         # 获取控件当前的模式
         mode = self.main_ui.frame_sw.itemText(index) 
         '''判断当前该使用什么视频源输入'''
-        if(mode != "视频输入"):
-            if(mode == 'socket'):
-                print(f"当前视频源: {mode}")
-                self.frameReceiveThread.myStart()          
-            else:
-                self.frameReceiveThread.myStop()   
-                          
-            if(mode == 'video'):
-                #TODO 读取视频路径
-                print(f"当前视频源: {mode}")         
-                pass
-            
-            if(mode == 'local'):
-                #TODO 打开usb摄像机
-                print(f"当前视频源: {mode}")
-                pass    
-        else: 
-            print("请设置视频输入模式....")
-   
-    
+        if(mode == 'socket'):
+            print(f"当前视频源: {mode}")
+            self.currentSource = 1
+            self.frameReceiveThread.myStart()          
+                   
+        elif(mode == 'video'):
+            #TODO 读取视频路径
+            self.currentSource = 2
+            print(f"当前视频源: {mode}")      
+            self.frameReceiveThread.myStop()  
+                  
+            pass
+        
+        elif(mode == 'local'):
+            #TODO 打开usb摄像机
+            self.currentSource = 3
+            print(f"当前视频源: {mode}")
+            self.frameReceiveThread.myStop()  
+               
+            pass   
+        else:
+            print("请选择当前视频源....")
+            self.frameReceiveThread.myStop()  
+               
     #TODO 模式切换器
     @Slot(int)
     def handleModeChange(self,index):

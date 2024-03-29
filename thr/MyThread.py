@@ -15,13 +15,13 @@ class MyThread(QThread):
     说明：如果需要添加功能，建议继承该模块，添加自定义功能和属性
 
     @param: setIdentity 设置线程名称
-    @return
+    @return:
     """
 
     sinOut = Signal(str) #  用于向主线程发送当前线程信息
 
-    def __init__(self, parent=None):
-        super(MyThread, self).__init__(parent)
+    def __init__(self):
+        super().__init__()
         self.identity = None
 
     def setIdentity(self, text):
