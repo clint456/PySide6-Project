@@ -3,9 +3,10 @@ import time
 
 from PySide6.QtCore import (QMutex, QMutexLocker, QThread, QWaitCondition,
                             Signal, Slot)
-from PySide6.QtGui import Qt
+from PySide6.QtGui import Qt,QGuiApplication
 from PySide6.QtWidgets import (QApplication, QProgressBar, QPushButton,
                                QVBoxLayout, QWidget)
+from PySide6 import QtWidgets
 from qt_material import apply_stylesheet
 
 from ui.loading_ui import Ui_LoadingScreen
@@ -17,7 +18,7 @@ class LoadWin(QWidget):
         super().__init__(parent=parent)  # 初始化父类
         self.currentProject = None
         self.current_project_index = 0  # 用于切换项目
-        
+
         self.bar_thread_running = False  # 标记线程是否正在运行
         self.__redefine_window_border()
         self.__setup_ui()
@@ -38,6 +39,7 @@ class LoadWin(QWidget):
         """初始化designer组件"""
         self.load_ui = Ui_LoadingScreen()
         self.load_ui.setupUi(self)  # 初始化designer界面
+
         # 获取designer界面组件对象
         self.progress_bar = self.load_ui.loadProgressBar
         self.start_btn = self.load_ui.startButton
@@ -47,6 +49,7 @@ class LoadWin(QWidget):
         self.select_program = self.load_ui.ProgramComboBox
         self.debug_bw.setFontPointSize(11)
         self.debug_bw.setTextColor("white")
+        self.center()
 
     def __load_connect(self):
         """初始化连接信号与槽"""
@@ -54,7 +57,12 @@ class LoadWin(QWidget):
         self.stop_btn.clicked.connect(self.stopAllThread)
         self.exit_btn.clicked.connect(self.exitProgram)
         self.select_program.activated.connect(self.changeProgram)
-
+    
+    def center(self):
+        screen = QGuiApplication.primaryScreen().availableGeometry()
+        size = self.geometry()
+        self.move((screen.width()-size.width())/2,(screen.height() - size.height()/2)) # 窗口居中
+        
     def debug_msg(self, str):
         """打印信息输出到Gui面板"""
         self.debug_bw.append(str)  # 添加到面板输出流

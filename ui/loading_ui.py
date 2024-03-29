@@ -25,26 +25,28 @@ class Ui_LoadingScreen(object):
     def setupUi(self, LoadingScreen):
         if not LoadingScreen.objectName():
             LoadingScreen.setObjectName(u"LoadingScreen")
-        LoadingScreen.resize(791, 622)
+        LoadingScreen.setWindowModality(Qt.NonModal)
+        LoadingScreen.setEnabled(True)
+        LoadingScreen.resize(1030, 775)
         LoadingScreen.setMinimumSize(QSize(620, 0))
         LoadingScreen.setProperty("unifiedTitleAndToolBarOnMac", False)
         self.horizontalLayout = QHBoxLayout(LoadingScreen)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.verticalLayout_4 = QVBoxLayout()
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
-        self.label = QLabel(LoadingScreen)
-        self.label.setObjectName(u"label")
+        self.label_frame = QLabel(LoadingScreen)
+        self.label_frame.setObjectName(u"label_frame")
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
-        self.label.setSizePolicy(sizePolicy)
-        self.label.setStyleSheet(u"\n"
+        sizePolicy.setHeightForWidth(self.label_frame.sizePolicy().hasHeightForWidth())
+        self.label_frame.setSizePolicy(sizePolicy)
+        self.label_frame.setStyleSheet(u"\n"
 "border-image: url(:/loader/resource/background.jpg);")
-        self.label.setTextFormat(Qt.AutoText)
-        self.label.setAlignment(Qt.AlignCenter)
+        self.label_frame.setTextFormat(Qt.AutoText)
+        self.label_frame.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_4.addWidget(self.label)
+        self.verticalLayout_4.addWidget(self.label_frame)
 
         self.label_2 = QLabel(LoadingScreen)
         self.label_2.setObjectName(u"label_2")
@@ -162,7 +164,7 @@ class Ui_LoadingScreen(object):
 
     def retranslateUi(self, LoadingScreen):
         LoadingScreen.setWindowTitle(QCoreApplication.translate("LoadingScreen", u"LoadingScreen", None))
-        self.label.setText(QCoreApplication.translate("LoadingScreen", u"<html><head/><body><p><br/></p></body></html>", None))
+        self.label_frame.setText(QCoreApplication.translate("LoadingScreen", u"<html><head/><body><p><br/></p></body></html>", None))
         self.label_2.setText(QCoreApplication.translate("LoadingScreen", u"<html><head/><body><p align=\"center\"><span style=\" font-weight:700;\">\u6d4b\u8bd5\u7cfb\u7edf</span></p></body></html>", None))
         self.groupBox.setTitle("")
         self.ProgramComboBox.setItemText(0, QCoreApplication.translate("LoadingScreen", u"\u9879\u76ee\u9009\u62e9", None))

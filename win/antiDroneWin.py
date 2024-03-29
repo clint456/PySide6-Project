@@ -4,6 +4,7 @@
 """
 
 import sys
+import cv2
 import logging
 from datetime import datetime
 from PySide6.QtWidgets import  (
@@ -17,8 +18,10 @@ from PySide6.QtCore import (
     QObject,
     QTimer,
     QEventLoop,
-    Slot
+    Slot,
+    Qt
 )
+from PySide6.QtGui import QPixmap
 from thr.MyThread import MyThread 
 from thr.receiveFrameThread import  ReceiveFrame
 
@@ -59,17 +62,16 @@ class AntiDrone(QWidget):
         self.frameReceiveThread =ReceiveFrame(port=port,address=address)
         self.frameReceiveThread.setIdentity("socket_thread")
         self.frameReceiveThread.sinOut.connect(self.frameReceiveHandle)
-        self.frameReceiveThread.SignalFrame.connect(self.updateFrame)
+        self.frameReceiveThread.SignalFrame.connect(self.socket_updateFrame)
         
-    def updateFrame(self,Frame):
-        '''控制视频流切换'''
+    def socket_updateFrame(self,Frame):
+        '''socket更新视频流'''
+        map = Frame.scaled(self.main_ui.frame_label.size(), aspectMode = Qt.KeepAspectRatioByExpanding) # 设置画面平铺
         if(self.currentSource == 1):
-            self.main_ui.frame_label.setPixmap(Frame)
-        else:
-            print("请选择======视频输入模式")
-        
+            self.main_ui.frame_label.setPixmap(map)
+
     def __setup_out_to_widget(self):
-        # 实时显示输出，将控制台输出重定向到界面中
+        '''实时显示输出，将控制台输出重定向到界面中'''
         sys.stdout = Signal_Gui()
         sys.stdout.text_update.connect(self.updateText)
         
@@ -77,6 +79,8 @@ class AntiDrone(QWidget):
         '''加载ui文件 初始化'''
         self.main_ui = Ui_MainWindow()
         self.main_ui.setupUi(self)
+
+    
     
     def setup_btn(self):
         '''信号连接'''
@@ -129,8 +133,7 @@ class AntiDrone(QWidget):
             #TODO 读取视频路径
             self.currentSource = 2
             print(f"当前视频源: {mode}")      
-            self.frameReceiveThread.myStop()  
-                  
+            self.frameReceiveThread.myStop()    
             pass
         
         elif(mode == 'local'):
@@ -138,8 +141,10 @@ class AntiDrone(QWidget):
             self.currentSource = 3
             print(f"当前视频源: {mode}")
             self.frameReceiveThread.myStop()  
-               
-            pass   
+            cap = cv2.VideoCapture(0)
+            # 设置镜头分辨率，默认是640x480 
+            self.local_frame.set(cv2.CAP_PROP_FRAME_WIDTH, 640) 
+            self.local_frame.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)     
         else:
             print("请选择当前视频源....")
             self.frameReceiveThread.myStop()  

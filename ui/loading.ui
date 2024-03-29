@@ -2,12 +2,18 @@
 <ui version="4.0">
  <class>LoadingScreen</class>
  <widget class="QWidget" name="LoadingScreen">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>791</width>
-    <height>622</height>
+    <width>1030</width>
+    <height>775</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -26,7 +32,7 @@
    <item>
     <layout class="QVBoxLayout" name="verticalLayout_4" stretch="6,0,1">
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="label_frame">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
          <horstretch>0</horstretch>
