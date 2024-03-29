@@ -141,10 +141,7 @@ class AntiDrone(QWidget):
             self.currentSource = 3
             print(f"当前视频源: {mode}")
             self.frameReceiveThread.myStop()  
-            self.cap = cv2.VideoCapture(0)
-            # 设置镜头分辨率，默认是640x480 
-            self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640) 
-            self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)     
+
         else:
             print("请选择当前视频源....")
             self.frameReceiveThread.myStop()  
