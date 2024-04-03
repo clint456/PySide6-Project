@@ -187,4 +187,4 @@ class AntiDrone(QWidget):
             event.ignore()
             
             
-    
+

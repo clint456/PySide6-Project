@@ -53,9 +53,10 @@ poetry install --no-root
 ---
 ## 4.待完成的任务
 1. 使用`run.py` 启动 `win/loadWin.py`,然后通过`class loadWin`再开启`class mainWin` 【2024.3.28 done】
-2. `thr/socketThread.py`数据传输模块测试 
+2. `thr/socketThread.py`数据传输模块测试 【2024.3.30 done】
 3. 添加一个实时显示下位机云台状态的动画
-
+4. 实现与下位机交互（坐标、置信度、框框大小）
+5. 模式切换，基本实现完整能
 --- 
 ## 5.BUG日志
 
